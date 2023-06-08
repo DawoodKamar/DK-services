@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../styles/header.module.css';
+import React, { useState } from 'react';
 
 const DkLogo = () => (
   <Image
@@ -12,22 +13,55 @@ const DkLogo = () => (
 );
 
 export default function Header () {
+    const [showMenu, setShowMenu] = useState(false);
+
+    const toggleMenu = () => {
+        setShowMenu(!showMenu);
+    };
+
+
     return (
 
     <header className={styles.header}>
-        <DkLogo/>
-        <div>
-          
-            <nav>
-                <h1>Home</h1>
-
-                <h2 className="workOrderForm">
-                    <Link href="/WorkOrder">NEW WORK ORDER</Link>
-                </h2>
-            </nav>
+        <div className={styles.banner}>
+            <DkLogo/>
         </div>
-        {/* Header content */}
+        
+  
+        <nav className={styles.navbar}>
+            <ul>
+                <li>
+                    <Link href="/">
+                    Home
+                    </Link>
+                </li>
+                <li>
+                    <Link href="/about">
+                    About Us
+                    </Link>
+                </li>
+                <li>
+                    <Link href="/contact">
+                    Contact
+                    </Link>
+                </li>
+                <li>
+                    <Link href="/WorkOrder">
+                    Mechanic Login
+                    </Link>
+                </li>
+            </ul>
+
+        </nav>
+        <div className={`${styles.hamburgerMenu} ${showMenu ? 'open' : ''}`} 
+        onClick={toggleMenu}>
+
+            <div className="line"></div>
+            <div className="line"></div>
+            <div className="line"></div>
+        </div>
+                
      </header>
 
     );
-}
+}//need to figure out hamburger menue and under stand why it is not working

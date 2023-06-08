@@ -13,12 +13,13 @@ body {
 }
 
 a {
-  color: #0070f3;
+  color: whitesmoke;
   text-decoration: none;
 }
 
 a:hover {
-  text-decoration: underline;
+  text-decoration: none;
+  color: lightgray;
 }
 
 img {
