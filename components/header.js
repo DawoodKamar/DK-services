@@ -15,7 +15,7 @@ const DkLogo = () => (
 export default function Header () {
     
     const [showMenu, setShowMenu] = useState(false);
-//show menu is a variable (initially set to false) |setshowmenu is a function that will update the variable
+//showmenu is a variable (initially set to false) |setshowmenu is a function that will update the variable
    
 
 const toggleMenu = () => {
@@ -29,6 +29,20 @@ const toggleMenu = () => {
     <header className={styles.header}>
         <div className={styles.banner}>
             <h1 className={styles.logo}>DK Services</h1>
+            <div className={`${styles.hamburgerMenu} ${showMenu ? styles.open : ''}`} 
+            onClick={toggleMenu}> 
+                {/* If showMenu is true,  styles.hamburgerMenu styles.open , otherwise styles.hamburgerMenu */}
+            
+                {/* `${}` template literal: allow you to embed expressions inside your strings, 
+                anything inside `${}` will be evaluated as a JavaScript expression. */}
+
+                {/* showMenu ? styles.open : '' is a ternary operator. This is a shortcut for an 
+                if-else statement. It reads like this: "If showMenu is true, use styles.open, otherwise use an empty string. */}
+
+                <div className={styles.line}></div>
+                <div className={styles.line}></div>
+                <div className={styles.line}></div>
+            </div>
         </div>
         
   
@@ -57,13 +71,7 @@ const toggleMenu = () => {
             </ul>
 
         </nav>
-        <div className={`${styles.hamburgerMenu} ${showMenu ? styles.open : ''}`} 
-        onClick={toggleMenu}>
-
-            <div className={styles.line}></div>
-            <div className={styles.line}></div>
-            <div className={styles.line}></div>
-        </div>
+        
                 
      </header>
 
