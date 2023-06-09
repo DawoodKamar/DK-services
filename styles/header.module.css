@@ -14,6 +14,13 @@
     align-items: center;
   }
 
+  .logo {
+    font-family: Brush Script MT ,cursive;
+    /* font-weight: bold; */
+    font-size: 4rem;
+    color: #f2f2f2;
+  }
+
   .navbar {
     background-color: #444;
     padding: 10px 0;
@@ -31,27 +38,27 @@
     margin-right: 10px;
   }
 
-  .hamburger-menu {
+  .hamburgerMenu {
     display: none;
   }
-  
-  .hamburger-menu .line {
+
+  .hamburgerMenu .line {
     width: 25px;
     height: 3px;
-    background-color: #fff;
+    background-color: black;
     margin: 5px;
     transition: transform 0.3s;
   }
   
-  .hamburger-menu.open .line:nth-child(1) {
+  .hamburgerMenu.open .line:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
   }
   
-  .hamburger-menu.open .line:nth-child(2) {
+  .hamburgerMenu.open .line:nth-child(2) {
     opacity: 0;
   }
   
-  .hamburger-menu.open .line:nth-child(3) {
+  .hamburgerMenu.open .line:nth-child(3) {
     transform: rotate(-45deg) translate(7px, -6px);
   }
   
@@ -61,8 +68,10 @@
       display: none;
     }
   
-    .hamburger-menu {
+    .hamburgerMenu {
       display: block;
       cursor: pointer;
+      height: 2rem;
+      border: yellow 2rem;
     }
   }

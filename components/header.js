@@ -13,18 +13,22 @@ const DkLogo = () => (
 );
 
 export default function Header () {
+    
     const [showMenu, setShowMenu] = useState(false);
+//show menu is a variable (initially set to false) |setshowmenu is a function that will update the variable
+   
 
-    const toggleMenu = () => {
+const toggleMenu = () => {
         setShowMenu(!showMenu);
     };
+    // function that toggles show menu between true and false
 
 
     return (
 
     <header className={styles.header}>
         <div className={styles.banner}>
-            <DkLogo/>
+            <h1 className={styles.logo}>DK Services</h1>
         </div>
         
   
@@ -53,15 +57,15 @@ export default function Header () {
             </ul>
 
         </nav>
-        <div className={`${styles.hamburgerMenu} ${showMenu ? 'open' : ''}`} 
+        <div className={`${styles.hamburgerMenu} ${showMenu ? styles.open : ''}`} 
         onClick={toggleMenu}>
 
-            <div className="line"></div>
-            <div className="line"></div>
-            <div className="line"></div>
+            <div className={styles.line}></div>
+            <div className={styles.line}></div>
+            <div className={styles.line}></div>
         </div>
                 
      </header>
 
     );
-}//need to figure out hamburger menue and under stand why it is not working
+}//comment the hamburger line
