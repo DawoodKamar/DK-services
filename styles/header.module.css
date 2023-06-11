@@ -37,6 +37,35 @@
     margin-right: 10px;
   }
 
+  .smallnavbar {
+    background-color: #444;
+    position: absolute;
+    left: 0.5rem;
+    right: 0.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0.98;
+  }
+
+  .smallnavbar.close {
+    display: none;
+  }
+
+  .smallnavbar ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 1rem 8rem;
+    gap: 1rem;
+  }
+  
+  .smallnavbar li {
+    margin-right: 10px;
+  }
+
   .hamburgerMenu {
     display: none;
   }

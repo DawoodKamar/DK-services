@@ -3,14 +3,14 @@ import Link from 'next/link';
 import styles from '../styles/header.module.css';
 import React, { useState } from 'react';
 
-const DkLogo = () => (
-  <Image
-    src="/images/dkLogo.jpg" // Route of the image file
-    height={100} // Desired size with correct aspect ratio
-    width={544} // Desired size with correct aspect ratio
-    alt="DK services LOGO"
-  />
-);
+// const DkLogo = () => (
+//   <Image
+//     src="/images/dkLogo.jpg" // Route of the image file
+//     height={100} // Desired size with correct aspect ratio
+//     width={544} // Desired size with correct aspect ratio
+//     alt="DK services LOGO"
+//   />
+// );
 
 export default function Header () {
     
@@ -47,6 +47,32 @@ const toggleMenu = () => {
         
   
         <nav className={styles.navbar}>
+            <ul>
+                <li>
+                    <Link href="/">
+                    Home
+                    </Link>
+                </li>
+                <li>
+                    <Link href="/about">
+                    About Us
+                    </Link>
+                </li>
+                <li>
+                    <Link href="/contact">
+                    Contact
+                    </Link>
+                </li>
+                <li>
+                    <Link href="/WorkOrder">
+                    Mechanic Login
+                    </Link>
+                </li>
+            </ul>
+
+        </nav>
+
+        <nav className={`${styles.smallnavbar} ${!showMenu ? styles.close : ''}`}>
             <ul>
                 <li>
                     <Link href="/">
