@@ -1,34 +1,41 @@
 .header {
     position: sticky;
     top: 0;
-    align-items: center;
-    justify-content: space-between;
     z-index: 100;
+    background-color: #555;
   }
 
   .banner {
-    background-color: #555;
-    height: 10rem;
+    max-width: 1470px;
+    height: 8rem;
     display: flex;
-    justify-content: center;
+    margin: auto;
+    justify-content: space-between;
     align-items: center;
   }
 
+
+
+
   .logo {
     font-family: Brush Script MT ,cursive;
-    font-size: 4rem;
+    font-size: 3.5rem;
     color: #f2f2f2;
+    padding: 1rem;
   }
 
   .navbar {
-    background-color: #444;
-    padding: 10px 0;
+ 
+    padding: 0.5rem 1rem ;
+    margin-right: 1rem;
+  
   }
   
   .navbar ul {
     display: flex;
     justify-content: last;
     list-style: none;
+    gap: 1rem;
     margin: 0;
     padding: 0;
   }
@@ -90,8 +97,13 @@
     transform: rotate(-45deg) translate(7px, -6px);
   }
   
+  @media (min-width:800px){
+    .smallnavbar {
+        display: none;
+      }
+  }
   
-  @media (max-width: 768px) {
+  @media (max-width: 800px) {
     .navbar {
       display: none;
     }
