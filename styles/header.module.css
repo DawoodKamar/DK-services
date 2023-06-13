@@ -1,8 +1,12 @@
 .header {
+    --_bg: #555;
+    --_logo-color: #f2f2f2;
+    --_nav-links-color: #f2f2f2;
+    
     position: sticky;
     top: 0;
     z-index: 100;
-    background-color: #555;
+    background-color: var(--_bg);
   }
 
   .banner {
@@ -20,7 +24,7 @@
   .logo {
     font-family: Brush Script MT ,cursive;
     font-size: 3.5rem;
-    color: #f2f2f2;
+    color: var(--_logo-color);
     padding: 1rem;
   }
 
@@ -42,16 +46,18 @@
   
   .navbar li {
     margin-right: 10px;
+    color: var(--_nav-links-color);
   }
 
   .smallnavbar {
-    background-color: #444;
     position: absolute;
     left: 0.5rem;
     right: 0.5rem;
     margin-left: auto;
     margin-right: auto;
     opacity: 0.98;
+    background-color: var(--_bg);
+ 
   }
 
   .smallnavbar.close {
@@ -80,7 +86,7 @@
   .hamburgerMenu .line {
     width: 25px;
     height: 3px;
-    background-color: #f2f2f2;
+    background-color: var(--_logo-color);
     margin: 5px;
     transition: transform 0.3s;
   }

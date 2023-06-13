@@ -1,4 +1,4 @@
-import Image from 'next/image';
+//import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../styles/header.module.css';
 import React, { useState } from 'react';
@@ -47,7 +47,7 @@ const toggleMenu = () => {
             
             
     
-                <nav className={styles.navbar}>
+                <nav className={styles.navbar} >
                     <ul>
                         <li>
                             <Link href="/">
@@ -75,25 +75,25 @@ const toggleMenu = () => {
             
         </div>
 
-        <nav className={`${styles.smallnavbar} ${!showMenu ? styles.close : ''}`}>
+        <nav className={`${styles.smallnavbar} ${!showMenu ? styles.close : ''}`} >
             <ul>
                 <li>
-                    <Link href="/">
+                    <Link href="/" onClick={toggleMenu}>
                     Home
                     </Link>
                 </li>
                 <li>
-                    <Link href="/about">
+                    <Link href="/about" onClick={toggleMenu}>
                     About Us
                     </Link>
                 </li>
                 <li>
-                    <Link href="/contact">
+                    <Link href="/contact" onClick={toggleMenu}>
                     Contact
                     </Link>
                 </li>
                 <li>
-                    <Link href="/WorkOrder">
+                    <Link href="/WorkOrder" onClick={toggleMenu}>
                     Mechanic Login
                     </Link>
                 </li>
