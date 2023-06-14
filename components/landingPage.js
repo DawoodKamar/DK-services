@@ -6,6 +6,21 @@ export default function LandingPage(){
   
       <section>
         <h1>HERO SECTIONs</h1>
+          <h1>HERO SECTIONs</h1>
+          <h1>HERO SECTIONs</h1>
+          <h1>HERO SECTIONs</h1>
+          <h1>HERO SECTIONs</h1>
+          <h1>HERO SECTIONs</h1>
+          <h1>HERO SECTIONs</h1>
+          <h1>HERO SECTIONs</h1>
+          <h1>HERO SECTIONs</h1>
+          <h1>HERO SECTIONs</h1>
+          <h1>HERO SECTIONs</h1>
+          <h1>HERO SECTIONs</h1>
+          <h1>HERO SECTIONs</h1>
+          <h1>HERO SECTIONs</h1>
+          <h1>HERO SECTIONs</h1>
+          <h1>HERO SECTIONs</h1>
         {/* Hero section */}
       </section>
       
