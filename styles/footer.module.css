@@ -1,0 +1,39 @@
+.footerbg {
+    background-color: var(--_bg);
+}
+
+.wrapper {
+    max-width: 1470px;
+    margin: auto;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 20px solid red; */
+}
+
+.top {
+    width: 100%;
+    display: flex;
+}
+.logo {
+    font-family: Brush Script MT ,cursive;
+    font-size: 2.5rem;
+    color: var(--_logo-color);
+    padding: 0.5rem;
+    margin: auto;
+  }
+
+  .line {
+    width: 30px;
+    height: 3px;
+    background-color: var(--_logo-color);
+    margin: auto;
+  }
+
+  .navbar ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 1rem;
+  }
+

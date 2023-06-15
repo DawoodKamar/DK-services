@@ -1,0 +1,45 @@
+import Link from 'next/link';
+import styles from '../styles/footer.module.css';
+
+export default function Footer() {
+
+
+
+    return(
+        <div className={styles.footerbg}>
+            <div className={styles.wrapper}>
+                <div className={styles.top}>
+                    <Link href="/" className={styles.logo}> DK Services</Link>
+                </div>
+                <div className={styles.line}></div>
+                <nav className={styles.navbar} >
+                    <ul>
+                        <li>
+                            <Link href="/">
+                            Home
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/about">
+                            About Us
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/contact">
+                            Contact
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/WorkOrder">
+                            Mechanic Login
+                            </Link>
+                        </li>
+                    </ul>
+
+                </nav>
+            </div>
+
+        </div>
+    );
+
+}

@@ -1,6 +1,7 @@
 import styles from './layout.module.css';
 import Head from 'next/head';
 import Header from './header';
+import Footer from './Footer';
 
 export default function Layout({ children }) {
   return <div className={styles.container}>
@@ -14,10 +15,7 @@ export default function Layout({ children }) {
   <Header/>
 
   <main>{children}</main>
-
-  <footer>
-    <div className="footer"><h2>-----------------Footer----------------------------------</h2></div>
-    {/* Add footer content here */}
-  </footer>
+  
+  <Footer/>
 </div>;
 }

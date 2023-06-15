@@ -1,8 +1,4 @@
 .header {
-    --_bg: #555;
-    --_logo-color: #f2f2f2;
-    --_nav-links-color: #f2f2f2;
-    
     position: sticky;
     top: 0;
     z-index: 100;
@@ -11,7 +7,7 @@
 
   .header.scrolled {
     opacity: 0.97;
-    height: 6rem;
+    height: 5rem;
   }
 
   .banner {
@@ -24,7 +20,7 @@
   }
 
   .banner.scrolled{
-    height: 6rem;
+    height: 5rem;
   }
 
 
