@@ -1,0 +1,43 @@
+.container {
+    height: 60vh;
+    max-width: 1470px;
+    border: 1px solid red;
+    margin: 6rem auto 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.heroSection {
+    display: flex;
+    flex-direction: column;
+  }
+
+.herohead {
+
+    border: 1px solid red;
+}
+
+.hook {
+
+
+    border: 1px solid red;
+}
+
+.img1, .img2, .img3{
+    position: relative;
+    width: 500px; /* adjust as needed */
+    height: 500px; /* adjust as needed */
+    border: 1px solid red;
+}
+
+.img1 {
+    right: 200px;
+}
+
+.img2 {
+    right: 100px;
+}
+
+.img3 {
+    right: 0px;
+}
