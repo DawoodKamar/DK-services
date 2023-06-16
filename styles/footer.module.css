@@ -29,11 +29,34 @@
     margin: auto;
   }
 
+  .lines{
+    display: none;
+  }
+
   .navbar ul {
     display: flex;
     list-style: none;
-    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
     margin: 0;
     padding: 1rem;
+  }
+
+  @media (max-width:600px){
+    .navbar ul {
+    flex-direction: column;
+    gap: 0.4rem;
+    
+    }
+
+    .lines{
+        display: block;
+        width: 20px;
+        height:1.5px;
+        background-color: var(--_logo-color);
+      }
+
+
   }
 

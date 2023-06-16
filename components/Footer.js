@@ -19,16 +19,19 @@ export default function Footer() {
                             Home
                             </Link>
                         </li>
+                        <div className={styles.lines}></div>
                         <li>
                             <Link href="/about">
                             About Us
                             </Link>
                         </li>
+                        <div className={styles.lines}></div>
                         <li>
                             <Link href="/contact">
                             Contact
                             </Link>
                         </li>
+                        <div className={styles.lines}></div>
                         <li>
                             <Link href="/WorkOrder">
                             Mechanic Login

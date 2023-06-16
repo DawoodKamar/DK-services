@@ -131,16 +131,19 @@ export default function Header () {
                     Home
                     </Link>
                 </li>
+                <div className={styles.lines}></div>
                 <li>
                     <Link href="/about" onClick={toggleMenu}>
                     About Us
                     </Link>
                 </li>
+                <div className={styles.lines}></div>
                 <li>
                     <Link href="/contact" onClick={toggleMenu}>
                     Contact
                     </Link>
                 </li>
+                <div className={styles.lines}></div>
                 <li>
                     <Link href="/WorkOrder" onClick={toggleMenu}>
                     Mechanic Login
