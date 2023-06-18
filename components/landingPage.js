@@ -2,6 +2,9 @@ import Layout from "./layout";
 import styles from '../styles/landingPage.module.css';
 import Image from "next/image";
 import dry from "../public/images/Dry-Van.png"
+import reefer from "../public/images/DuraPlate_HD.png"
+import flat from "../public/images/Transcraft-Hybrid-Flatbed-.png"
+
 
 export default function LandingPage(){
     return(
@@ -13,22 +16,32 @@ export default function LandingPage(){
           <div className={styles.hook}><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet atque minima error optio debitis ab</p></div>
           <button className={styles.cta}>Call Now</button>
         </div>
-        <div className={styles.img1}>
-        <Image
-          src={dry}
-          alt="dryvan"
-          placeholder="blur" 
-          fill
-        
-        /> 
-        
-        </div>  
-        {/* <div className={styles.img2}>test</div>  
-        <div className={styles.img3}>test</div> */}
-
-
+        <div className={styles.images}>
+ 
+          <div className={styles.img2}>
+            <Image
+              src={reefer}
+              alt="dryvan"
+              placeholder="blur" 
+              fill
+            
+            /> 
+          </div> 
+          
+          <div className={styles.img3}>
+            <Image
+              src={dry}
+              alt="dryvan"
+              placeholder="blur" 
+              fill
+            
+            /> 
+          </div>
+        </div>
 
       </div>
+
+      <div className={styles.container2}></div>
       
     </Layout>
   );
