@@ -17,15 +17,25 @@ export default function LandingPage(){
           <button className={styles.cta}>Call Now</button>
         </div>
         <div className={styles.images}>
- 
-          <div className={styles.img2}>
-            <Image
+             <Image
               src={reefer}
               alt="dryvan"
+              placeholder="blur"
+              width={1200} 
+              height={803}
+              className={styles.img1}
+            />
+            <Image
+              src={dry}
+              alt="Reefer"
               placeholder="blur" 
-              fill
+              width={1200} 
+              height={803}
+              className={styles.img2}
             
             /> 
+          {/* <div className={styles.img2}>
+
           </div> 
           
           <div className={styles.img3}>
@@ -36,12 +46,12 @@ export default function LandingPage(){
               fill
             
             /> 
-          </div>
+          </div> */}
         </div>
 
       </div>
 
-      <div className={styles.container2}></div>
+      <div className={styles.container2}>testing 123</div>
       
     </Layout>
   );
