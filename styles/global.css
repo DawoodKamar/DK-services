@@ -9,7 +9,7 @@ body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.6;
-  font-size: 18px;
+  font-size: 1.1rem;
 }
 
 * {
@@ -19,6 +19,7 @@ body {
 a {
   color: var(--_nav-links-color);
   text-decoration: none;
+  transition-duration: 0.2s;
 }
 
 a:hover {
@@ -26,8 +27,8 @@ a:hover {
   color: var(--_nav-links-hover-color);
 }
 
-img {
+/* img {
   max-width: 100%;
   display: block;
-}
+} */
 

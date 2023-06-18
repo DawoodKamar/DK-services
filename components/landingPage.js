@@ -1,5 +1,7 @@
 import Layout from "./layout";
 import styles from '../styles/landingPage.module.css';
+import Image from "next/image";
+import dry from "../public/images/Dry-Van.png"
 
 export default function LandingPage(){
     return(
@@ -7,12 +9,22 @@ export default function LandingPage(){
   
       <div className={styles.container}>
         <div className={styles.heroSection}>
-          <div className={styles.herohead}><h1>Lorem ipsum dolor sit amet consnderit autem necessitatibus, eum consectetur?</h1></div>
-          <div className={styles.hook}><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet atque minima error optio debitis ab, assumenda molestiae deserunt alias veniam aut suscipit iste repellat labore rem esse in dolorum impedit.</p></div>
+          <div className={styles.herohead}><h1>Lorem ipsum dolor sit amet consnderit autem</h1></div>
+          <div className={styles.hook}><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet atque minima error optio debitis ab</p></div>
+          <button className={styles.cta}>Call Now</button>
         </div>
-        <div className={styles.img1}>test</div>  
-        <div className={styles.img2}>test</div>  
-        <div className={styles.img3}>test</div>
+        <div className={styles.img1}>
+        <Image
+          src={dry}
+          alt="dryvan"
+          placeholder="blur" 
+          fill
+        
+        /> 
+        
+        </div>  
+        {/* <div className={styles.img2}>test</div>  
+        <div className={styles.img3}>test</div> */}
 
 
 
