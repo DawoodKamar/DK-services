@@ -9,8 +9,9 @@ import flat from "../public/images/Transcraft-Hybrid-Flatbed-.png"
 export default function LandingPage(){
     return(
     <Layout>
-  
-      <div className={styles.container}>
+
+
+      <section className={`${styles.hero} ${styles.wrap}`}>
         <div className={styles.heroSection}>
           <div className={styles.herohead}><h1>Your fleet is looking good. Lets get it back on the road.</h1></div>
           <div className={styles.hook}><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet atque minima error optio debitis ab</p></div>
@@ -49,9 +50,30 @@ export default function LandingPage(){
           </div> */}
         </div>
 
-      </div>
+      </section>
+{/* ----------------------------------------------------------------------- */}
 
-      <div className={styles.container2}>testing 123</div>
+
+      <section className={`${styles.break} ${styles.diagonal}`}>
+          <div className={styles.wrap}>
+
+            <div className={styles.tag1}>
+              <div className={styles.experience}><h2>Experience</h2><p>years in the truck and trailer service industry</p></div>
+            </div>
+
+            <div className={styles.tag2}>
+
+              <div className={styles.reliability}></div>
+            </div>
+
+            <div className={styles.tag3}>
+              <div className={styles.dedication}></div>
+            </div>
+
+          </div>
+
+
+      </section>
       
     </Layout>
   );

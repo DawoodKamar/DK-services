@@ -1,4 +1,11 @@
-.container {
+.wrap {
+    max-width: 2000px;
+    align-items: center;
+    margin: auto;
+    padding-inline: 1rem;
+}
+
+.hero  {
     /* height: 70vh; */
     min-height: 80svh;
     max-width: 2000px;
@@ -88,7 +95,7 @@
 }
 
   @media (max-width: 1000px){
-    .container{
+    .hero {
         gap: 3rem;
 
     
@@ -101,7 +108,7 @@
     .heroSection {
         max-width: 100%;
       }
-    .container{
+    .hero {
         gap: 0rem;
     
     }
@@ -116,5 +123,28 @@
   
   .container2 {
     height: 1000px;
+}
+
+/* /////////////////////////////////////////////////////////////////// */
+
+/* .break {
+    padding-block: 5rem;
+} */
+
+.diagonal {
+    position: relative;
+    padding: 10rem;
+
+}
+
+
+.diagonal::after{
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: skewY(5deg);
+    z-index: -1;
+    background-image: linear-gradient(-45deg, var(--_bg), 30%, var(--_nav-links-color), 70%, var(--_bg));
+
 }
 
