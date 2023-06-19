@@ -12,7 +12,7 @@ export default function LandingPage(){
   
       <div className={styles.container}>
         <div className={styles.heroSection}>
-          <div className={styles.herohead}><h1>Lorem ipsum dolor sit amet consnderit autem</h1></div>
+          <div className={styles.herohead}><h1>Your fleet is looking good. Lets get it back on the road.</h1></div>
           <div className={styles.hook}><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet atque minima error optio debitis ab</p></div>
           <button className={styles.cta}>Call Now</button>
         </div>
