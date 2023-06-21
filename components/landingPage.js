@@ -3,7 +3,7 @@ import styles from '../styles/landingPage.module.css';
 import Image from "next/image";
 import dry from "../public/images/Dry-Van.png"
 import reefer from "../public/images/DuraPlate_HD.png"
-import flat from "../public/images/Transcraft-Hybrid-Flatbed-.png"
+import working from "../public/images/working.jpg"
 
 
 export default function LandingPage(){
@@ -55,28 +55,34 @@ export default function LandingPage(){
 
 
       <section className={`${styles.break} ${styles.diagonal}`}>
+
           <div className={styles.wrap}>
-
-            <div className={styles.tag1}>
-              <div className={styles.experience}><h2>Experience</h2><p>Many years in the truck and trailer service industry</p></div>
-            </div>
-            <div className={styles.centerRow}>
-              <div className={styles.item1}></div>
               <div className={styles.working}>
-
+                  <Image
+                      src={working}
+                      alt="Reefer"
+                      width={1118}
+                      height={871}
+                      className={styles.img3}
+                  />
               </div>
-              <div className={styles.tag2}>
-
-                <div className={styles.reliability}><h2>Reliability</h2><p>Fully licenced, insured, and highly reliable mechanics you can count on</p></div>
+              <div>
+                  <div className={styles.tag1}>
+                      <h2>Experience</h2><p>Many years in the truck and trailer service industry</p>
+                  </div>
+                  {/* <div className={styles.line}></div> */}
+                  <div className={styles.tag2}>
+                      <h2>Reliability</h2><p>Fully licenced, insured, and highly reliable mechanics you can count on</p>
+                  </div>
+                  {/* <div className={styles.line}></div> */}
+                  <div className={styles.tag3}>
+                      <h2>Dedication</h2><p>Committed to getting your fleet back on the road safely and swiftly</p>
+                  </div>
               </div>
-            </div>
-            <div className={styles.tag3}>
-              <div className={styles.dedication}><h2>Dedication</h2><p>Committed to getting your fleet back on the road safely and swiftly</p></div>
-            </div>
-
           </div>
 
 
+ 
       </section>
       
     </Layout>
