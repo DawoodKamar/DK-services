@@ -104,12 +104,12 @@ export default function Header () {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/about">
+                            <Link href="/About">
                             About Us
                             </Link>
                         </li>
                         <li>
-                            <Link href="/contact">
+                            <Link href="/Contact">
                             Contact
                             </Link>
                         </li>
@@ -133,13 +133,13 @@ export default function Header () {
                 </li>
                 <div className={styles.lines}></div>
                 <li>
-                    <Link href="/about" onClick={toggleMenu}>
+                    <Link href="/About" onClick={toggleMenu}>
                     About Us
                     </Link>
                 </li>
                 <div className={styles.lines}></div>
                 <li>
-                    <Link href="/contact" onClick={toggleMenu}>
+                    <Link href="/Contact" onClick={toggleMenu}>
                     Contact
                     </Link>
                 </li>

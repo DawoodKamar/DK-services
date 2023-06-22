@@ -21,13 +21,13 @@ export default function Footer() {
                         </li>
                         <div className={styles.lines}></div>
                         <li>
-                            <Link href="/about">
+                            <Link href="/About">
                             About Us
                             </Link>
                         </li>
                         <div className={styles.lines}></div>
                         <li>
-                            <Link href="/contact">
+                            <Link href="/Contact">
                             Contact
                             </Link>
                         </li>
