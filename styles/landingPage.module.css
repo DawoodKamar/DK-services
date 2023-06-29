@@ -144,11 +144,11 @@
     overflow: hidden;
     width: 100%;
     max-width: 500px;
-    height: 500px;
+    height: 500px;   
   }
   
   .img3 {
-    object-fit: cover;
+    object-fit: contain;
   }
 
   
@@ -161,12 +161,7 @@
       max-width: 100%;
     }
   }
-  .line {
-    width: 60px;
-    height: 3px;
-    background-color: var(--_logo-color);
-    margin: auto;
-  }
+
 
   @media (max-width: 1000px){
     .hero {

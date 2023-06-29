@@ -4,6 +4,7 @@ import Image from "next/image";
 import dry from "../public/images/Dry-Van.png"
 import reefer from "../public/images/DuraPlate_HD.png"
 import working from "../public/images/working.jpg"
+import ContactForm from "./ContactForm";
 
 
 export default function LandingPage(){
@@ -82,8 +83,9 @@ export default function LandingPage(){
           </div>
 
 
- 
       </section>
+
+      <ContactForm/>
       
     </Layout>
   );

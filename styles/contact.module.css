@@ -1,17 +1,21 @@
-.contactFormContainer{
-    max-width: 600px;
-
-}
 
 .formSection {
     max-width: 2000px;
-    align-items: center;
+    align-items: flex-start;
     margin: auto;
     display: flex;
     flex-wrap: wrap;
     gap: 6rem;
     padding: 3rem;
     justify-content: center;
+
+
+}
+
+.contactFormContainer, .info{
+
+    max-width: 600px;
+    width: 70vw;
 
 }
 
@@ -27,6 +31,7 @@
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
+    margin: 0.5rem 0;
 }
 
 .submitButton {
