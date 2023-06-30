@@ -123,8 +123,8 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-evenly;
-    gap: 2em;
+    justify-content: center;
+    gap: 10vw;
   }
   
   .tag1, .tag2, .tag3 {
@@ -155,6 +155,7 @@
   @media screen and (max-width: 768px) {
     .wrap {
       flex-direction: column;
+      gap: 3rem;
     }
   
     .working {
@@ -166,11 +167,11 @@
   @media (max-width: 1000px){
     .hero {
         gap: 3rem;
-
-    
     }
+
   }
   @media (max-width: 800px) {
+
     .heroSection, .images {
       flex: 100%;
     }
