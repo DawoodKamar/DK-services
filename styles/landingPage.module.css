@@ -101,6 +101,9 @@
     padding-block: 5rem;
 } */
 
+.tag {
+  line-height: 0.4;
+}
 .diagonal {
     position: relative;
     padding: 5rem 2rem 5rem 2rem;

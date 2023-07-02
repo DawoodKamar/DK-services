@@ -69,15 +69,15 @@ export default function LandingPage(){
               </div>
               <div>
                   <div className={styles.tag1}>
-                      <h2>Experience</h2><p>Many years in the truck and trailer service industry</p>
+                      <h2 className={styles.tag}>Experience</h2><p>Many years in the truck and trailer service industry</p>
                   </div>
                   {/* <div className={styles.line}></div> */}
                   <div className={styles.tag2}>
-                      <h2>Reliability</h2><p>Fully licenced, insured, and highly reliable mechanics you can count on</p>
+                      <h2 className={styles.tag}>Reliability</h2><p>Fully licenced, insured, and highly reliable mechanics you can count on</p>
                   </div>
                   {/* <div className={styles.line}></div> */}
                   <div className={styles.tag3}>
-                      <h2>Dedication</h2><p>Committed to getting your fleet back on the road safely and swiftly</p>
+                      <h2 className={styles.tag}>Dedication</h2><p>Committed to getting your fleet back on the road safely and swiftly</p>
                   </div>
               </div>
           </div>

@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    max-width: 1500px;
+    margin: 0 auto;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20%;
+}
+
+
+
+
+
+
+
+
+.column1 {
+    flex: 1;
+    max-width: 50%;
+
+}
+
+.column2 {
+    flex: 1;
+    border: 1px solid green;
+    max-width: 50%;
+    object-fit: contain;
+}
+
+.image img {
+    max-width: 100%;
+    height: auto;
+}
