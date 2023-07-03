@@ -35,7 +35,7 @@ export default function ContactForm() {
           <div className={styles.row2}>
             {/* Heading */}
             <div className={styles.heading}>
-              <h2>Client-Focused Solutions</h2>
+              <h3>Client-Focused Solutions</h3>
             </div>
 
             {/* Divider */}
@@ -77,7 +77,7 @@ export default function ContactForm() {
         <div className={styles.column1}>
           {/* Heading */}
           <div className={styles.heading}>
-            <h2>Comprehensive Services</h2>
+            <h3>Comprehensive Services</h3>
           </div>
 
           {/* Divider */}
@@ -100,7 +100,7 @@ export default function ContactForm() {
         <div className={styles.column2}>
           {/* Heading */}
           <div className={styles.heading}>
-            <h2>On-Site Assistance</h2>
+            <h3>On-Site Assistance</h3>
           </div>
 
           {/* Divider */}
@@ -127,7 +127,7 @@ export default function ContactForm() {
         <div className={styles.column1}>
           {/* Heading */}
           <div className={styles.heading}>
-            <h2>Reliability and Transparency</h2>
+            <h3>Reliability and Transparency</h3>
           </div>
 
           {/* Divider */}
@@ -149,7 +149,7 @@ export default function ContactForm() {
         <div className={styles.column2}>
           {/* Heading */}
           <div className={styles.heading}>
-            <h2>Better Business, Better Lives</h2>
+            <h3>Better Business, Better Lives</h3>
           </div>
 
           {/* Divider */}

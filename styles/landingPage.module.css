@@ -1,35 +1,40 @@
 
 .hero  {
     /* height: 70vh; */
-    min-height: 80svh;
+    /* min-height: 70svh; */
     max-width: 2000px;
     align-items: center;
     margin: auto;
     display: flex;
     flex-wrap: wrap;
     gap: 6rem;
-    padding-bottom: 3rem;
+    padding: 3rem 0 5rem 0;
    
   }
 
   
 .heroSection {
+    /* display: flex;
+    flex-direction: column; */
     flex: 1 0 60%; 
     padding: 20px;
     max-width: 35%;
     z-index: 2;
+    gap: 0;
   }
+
 
 .hook {
     font-size: clamp(1rem, 1.5vw, 2rem);
 }
 .cta {
+    /* display: flex; */
     width: fit-content;
     padding: 0.5rem 1rem;
     font-size: 1.1rem;
     background: var(--_bg);
     color: var(--_nav-links-color);
-    margin: auto;
+
     display: inline-block;
     cursor: pointer;
     transition-duration: 0.4s;
@@ -170,6 +175,7 @@
   @media (max-width: 1000px){
     .hero {
         gap: 3rem;
+        padding: 1rem 0 1rem 0;
     }
 
   }
