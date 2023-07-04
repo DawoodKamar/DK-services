@@ -1,5 +1,39 @@
 import React, { useState } from "react";
 
+//------------------------------------------------------------------------------------------------
+function DescriptionInput({
+  index,
+  handleDescriptionChange,
+  handleTimeChange,
+  handleRemove,
+}) {
+  return (
+    <div>
+      <label>
+        Description {index + 1}:
+        <input
+          type="text"
+          name={`description${index}`}
+          onChange={handleDescriptionChange}
+        />
+      </label>
+      <label>
+        Time {index + 1}:
+        <input
+          type="number"
+          step="0.1"
+          name={`time${index}`}
+          onChange={handleTimeChange}
+        />
+      </label>
+      <button type="button" onClick={handleRemove}>
+        Remove
+      </button>
+    </div>
+  );
+}
+//-------------------------------form state----------------================================
+
 export default function WorkOrderForm() {
   //  The initial state is an object with keys for each input in the form,
   // and empty string values for each key. The jobDate key is initialized with the current date
@@ -14,7 +48,7 @@ export default function WorkOrderForm() {
     vin: "",
     licensePlate: "",
     hubometer: "",
-    description: "",
+    descriptions: [{ description: "", time: "" }],
     parts: "",
     totalHours: "",
   });
@@ -30,6 +64,35 @@ export default function WorkOrderForm() {
     console.log(form);
     // Add your form submission logic here
   };
+
+  //------------------handle description change-----------------------------
+
+  const handleAddDescription = () => {
+    setForm({
+      ...form,
+      descriptions: [...form.descriptions, { description: "", time: "" }],
+    });
+  };
+
+  const handleDescriptionChange = (e, index) => {
+    const newDescriptions = [...form.descriptions];
+    newDescriptions[index].description = e.target.value;
+    setForm({ ...form, descriptions: newDescriptions });
+  };
+
+  const handleTimeChange = (e, index) => {
+    const newDescriptions = [...form.descriptions];
+    newDescriptions[index].time = parseFloat(e.target.value) || 0;
+    setForm({ ...form, descriptions: newDescriptions });
+  };
+
+  const handleRemoveDescription = (index) => {
+    const newDescriptions = [...form.descriptions];
+    newDescriptions.splice(index, 1);
+    setForm({ ...form, descriptions: newDescriptions });
+  };
+
+  //------------------------form-----------------------
 
   return (
     <form onSubmit={handleSubmit}>
@@ -79,10 +142,19 @@ export default function WorkOrderForm() {
         Hubometer:
         <input type="text" name="hubometer" onChange={handleChange} />
       </label>
-      <label>
-        Description:
-        <textarea name="description" onChange={handleChange} />
-      </label>
+      {form.descriptions.map((item, index) => (
+        <DescriptionInput
+          key={index}
+          index={index}
+          handleDescriptionChange={(e) => handleDescriptionChange(e, index)}
+          handleTimeChange={(e) => handleTimeChange(e, index)}
+          handleRemove={() => handleRemoveDescription(index)}
+        />
+      ))}
+      <button type="button" onClick={handleAddDescription}>
+        Add Description
+      </button>
+
       <label>
         Parts:
         <textarea name="parts" onChange={handleChange} />
