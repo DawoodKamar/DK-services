@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 
-//------------------------------------------------------------------------------------------------
+//--------------------------------------description component----------------------------------------------------------
 function DescriptionInput({
+  description,
+  time,
   index,
   handleDescriptionChange,
   handleTimeChange,
@@ -10,21 +12,54 @@ function DescriptionInput({
   return (
     <div>
       <label>
-        Description {index + 1}:
+        {index + 1}:
         <input
           type="text"
+          value={description}
           name={`description${index}`}
           onChange={handleDescriptionChange}
         />
       </label>
       <label>
-        Time {index + 1}:
+        Time:
         <input
           type="number"
-          step="0.1"
+          step="0.25"
+          value={time}
           name={`time${index}`}
           onChange={handleTimeChange}
         />
+      </label>
+      <button type="button" onClick={handleRemove}>
+        Remove
+      </button>
+    </div>
+  );
+}
+
+//--------------------------------------parts component----------------------------------------------------------
+
+function PartsInput({
+  parts,
+  index,
+  handleQuantityChange,
+  handlePartChange,
+  handleRemove,
+}) {
+  return (
+    <div>
+      <label>
+        Quantity:
+        <input
+          type="text"
+          value={parts}
+          name={`quantity${index}`}
+          onChange={handleQuantityChange}
+        />
+      </label>
+      <label>
+        Part:
+        <input type="text" name={`part${index}`} onChange={handlePartChange} />
       </label>
       <button type="button" onClick={handleRemove}>
         Remove
@@ -49,7 +84,7 @@ export default function WorkOrderForm() {
     licensePlate: "",
     hubometer: "",
     descriptions: [{ description: "", time: "" }],
-    parts: "",
+    parts: [{ quantity: "1", part: "" }],
     totalHours: "",
   });
   //{ ...form }: This is using the spread syntax (...) to create a new object that has all the same properties as our current form state object.
@@ -62,9 +97,8 @@ export default function WorkOrderForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(form);
-    // Add your form submission logic here
+    // Add submission logic here
   };
-
   //------------------handle description change-----------------------------
 
   const handleAddDescription = () => {
@@ -78,18 +112,55 @@ export default function WorkOrderForm() {
     const newDescriptions = [...form.descriptions];
     newDescriptions[index].description = e.target.value;
     setForm({ ...form, descriptions: newDescriptions });
+    updateStateAndCalculateTotalHours(newDescriptions);
   };
 
   const handleTimeChange = (e, index) => {
     const newDescriptions = [...form.descriptions];
     newDescriptions[index].time = parseFloat(e.target.value) || 0;
     setForm({ ...form, descriptions: newDescriptions });
+    updateStateAndCalculateTotalHours(newDescriptions);
   };
 
   const handleRemoveDescription = (index) => {
     const newDescriptions = [...form.descriptions];
     newDescriptions.splice(index, 1);
     setForm({ ...form, descriptions: newDescriptions });
+    updateStateAndCalculateTotalHours(newDescriptions);
+  };
+
+  //------------------handle part change-----------------------------
+  const handleAddPart = () => {
+    setForm({
+      ...form,
+      parts: [...form.parts, { quantity: "1", part: "" }],
+    });
+  };
+
+  const handlePartChange = (e, index) => {
+    const newParts = [...form.parts];
+    newParts[index].part = e.target.value;
+    setForm({ ...form, parts: newParts });
+  };
+
+  const handleRemovePart = (index) => {
+    const newParts = [...form.parts];
+    newParts.splice(index, 1);
+    setForm({ ...form, parts: newParts });
+  };
+
+  const handleQuantityChange = (e, index) => {
+    const newParts = [...form.parts];
+    newParts[index].quantity = e.target.value;
+    setForm({ ...form, parts: newParts });
+  };
+  //------------------handle total hours-----------------------------
+  const updateStateAndCalculateTotalHours = (newDescriptions) => {
+    const total = newDescriptions.reduce(
+      (sum, item) => sum + parseFloat(item.time || 0),
+      0
+    );
+    setForm({ ...form, descriptions: newDescriptions, totalHours: total });
   };
 
   //------------------------form-----------------------
@@ -118,10 +189,7 @@ export default function WorkOrderForm() {
         Address:
         <input type="text" name="address" onChange={handleChange} />
       </label>
-      <label>
-        Street Address:
-        <input type="text" name="streetAddress" onChange={handleChange} />
-      </label>
+
       <label>
         City:
         <input type="text" name="city" onChange={handleChange} />
@@ -142,9 +210,12 @@ export default function WorkOrderForm() {
         Hubometer:
         <input type="text" name="hubometer" onChange={handleChange} />
       </label>
+      <p>Description</p>
       {form.descriptions.map((item, index) => (
         <DescriptionInput
           key={index}
+          description={item.description}
+          time={item.time}
           index={index}
           handleDescriptionChange={(e) => handleDescriptionChange(e, index)}
           handleTimeChange={(e) => handleTimeChange(e, index)}
@@ -154,14 +225,34 @@ export default function WorkOrderForm() {
       <button type="button" onClick={handleAddDescription}>
         Add Description
       </button>
-
+      <p>Parts</p>
       <label>
-        Parts:
-        <textarea name="parts" onChange={handleChange} />
+        {form.parts.map((item, index) => (
+          <PartsInput
+            key={index}
+            index={index}
+            parts={item.quantity}
+            quantity={item.quantity}
+            handlePartChange={(e) => handlePartChange(e, index)}
+            handleQuantityChange={(e) => handleQuantityChange(e, index)}
+            handleRemove={() => handleRemovePart(index)}
+          />
+        ))}
+        <button type="button" onClick={handleAddPart}>
+          Add Part
+        </button>
+        {/* Parts:
+        <textarea name="parts" onChange={handleChange} /> */}
       </label>
       <label>
         Total Hours:
-        <input type="number" name="totalHours" onChange={handleChange} />
+        <input
+          type="number"
+          name="totalHours"
+          value={form.totalHours}
+          onChange={handleChange}
+          readOnly
+        />
       </label>
       <button type="submit">Submit</button>
     </form>
