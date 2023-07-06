@@ -1,4 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import styles from "../styles/workOrderForm.module.css";
+
+//--------------------------------------growing text area component----------------------------------------------------------
+function GrowingTextarea({ value, onChange, ...props }) {
+  const textareaRef = React.useRef(null);
+
+  () => {
+    const textarea = textareaRef.current; // Reset the height to auto to shrink
+    textarea.style.height = "auto"; // Set the height to the scrollHeight so it grows
+    textarea.style.height = textarea.scrollHeight + "px";
+  };
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height =
+        textareaRef.current.scrollHeight + "px";
+    }
+  }, [value]);
+
+  return (
+    <textarea
+      ref={textareaRef}
+      value={value}
+      onChange={onChange}
+      {...props}
+      style={{ overflow: "hidden", resize: "none" }}
+    />
+  );
+}
 
 //--------------------------------------description component----------------------------------------------------------
 function DescriptionInput({
@@ -10,14 +39,13 @@ function DescriptionInput({
   handleRemove,
 }) {
   return (
-    <div>
+    <div className={styles.description}>
       <label>
         {index + 1}:
-        <input
-          type="text"
+        <GrowingTextarea
           value={description}
           name={`description${index}`}
-          onChange={handleDescriptionChange}
+          onChange={(e) => handleDescriptionChange(e, index)}
         />
       </label>
       <label>
@@ -166,8 +194,9 @@ export default function WorkOrderForm() {
   //------------------------form-----------------------
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <h1>Work Order Form</h1>
+      <hr />
       <label>
         Work Order Number:
         <input type="number" name="workOrderNumber" onChange={handleChange} />
@@ -238,12 +267,13 @@ export default function WorkOrderForm() {
             handleRemove={() => handleRemovePart(index)}
           />
         ))}
-        <button type="button" onClick={handleAddPart}>
-          Add Part
-        </button>
-        {/* Parts:
-        <textarea name="parts" onChange={handleChange} /> */}
       </label>
+      <button type="button" onClick={handleAddPart}>
+        Add Part
+      </button>
+      {/* Parts:
+        <textarea name="parts" onChange={handleChange} /> */}
+
       <label>
         Total Hours:
         <input
