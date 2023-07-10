@@ -18,3 +18,36 @@ model Star {
   name            String    @db.VarChar(255)
   constellation   String    @db.VarChar(255)
 }
+
+model WorkOrder {
+  id            Int      @id @default(autoincrement())
+  workOrderNumber Int @unique
+  jobDate       DateTime
+  client        String
+  address       String?
+  streetAddress String?
+  city          String?
+  unitNumber    String?
+  vin           String?
+  licensePlate  String?
+  hubometer     String?
+  totalHours    Float
+  descriptions  Description[]
+  parts         Part[]
+}
+
+model Description {
+  id          Int     @id @default(autoincrement())
+  description String?
+  time        Float?
+  workOrderId Int
+  workOrder   WorkOrder @relation(fields: [workOrderId], references: [id])
+}
+
+model Part {
+  id          Int     @id @default(autoincrement())
+  quantity    String?
+  part        String?
+  workOrderId Int
+  workOrder   WorkOrder @relation(fields: [workOrderId], references: [id])
+}

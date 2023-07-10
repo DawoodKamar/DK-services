@@ -199,7 +199,12 @@ export default function WorkOrderForm() {
       <hr />
       <label>
         Work Order Number:
-        <input type="number" name="workOrderNumber" onChange={handleChange} />
+        <input
+          type="number"
+          name="workOrderNumber"
+          onChange={handleChange}
+          readOnly
+        />
       </label>
       <label>
         Job Date:
