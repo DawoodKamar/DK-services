@@ -10,6 +10,8 @@ export default function WorkOrder() {
         <title>Work Order Form</title>
       </Head>
       {/* <DkLogo/> */}
+      <Link href="/WorkOrderList">Submitions</Link>
+      <p>list</p>
       <WorkOrderForm />
     </Layout>
   );
