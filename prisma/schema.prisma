@@ -32,8 +32,8 @@ model WorkOrder {
   licensePlate  String?
   hubometer     String?
   totalHours    Float
-  descriptions  Description[]
-  parts         Part[]
+  descriptions  Description?
+  parts         Part?
 }
 
 model Description {
@@ -48,6 +48,6 @@ model Part {
   id          Int     @id @default(autoincrement())
   quantity    String?
   part        String?
-  workOrderId Int
-  workOrder   WorkOrder @relation(fields: [workOrderId], references: [id])
+  workOrderId Int?
+  workOrder   WorkOrder? @relation(fields: [workOrderId], references: [id])
 }

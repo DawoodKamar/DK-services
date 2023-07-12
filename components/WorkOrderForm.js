@@ -122,10 +122,18 @@ export default function WorkOrderForm() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // submission logic
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(form);
-    // Add submission logic here
+    fetch("/api/dk-services", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data)) // Or do something with the new work order
+      .catch((error) => console.error(error));
   };
   //------------------handle description change-----------------------------
 
@@ -199,12 +207,7 @@ export default function WorkOrderForm() {
       <hr />
       <label>
         Work Order Number:
-        <input
-          type="number"
-          name="workOrderNumber"
-          onChange={handleChange}
-          readOnly
-        />
+        <input type="number" name="workOrderNumber" onChange={handleChange} />
       </label>
       <label>
         Job Date:

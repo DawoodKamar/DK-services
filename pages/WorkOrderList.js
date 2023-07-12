@@ -6,7 +6,7 @@ export default function WorkOrderList() {
   const [workOrders, setWorkOrders] = useState([]);
 
   useEffect(() => {
-    fetch("/api/workOrders")
+    fetch("/api/dk-services")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -24,7 +24,10 @@ export default function WorkOrderList() {
       </Head>
       <ul>
         {workOrders.map((workOrder) => (
-          <li key={workOrder.id}>{workOrder.workOrderNumber}</li>
+          <li key={workOrder.id}>
+            Workorder Number {workOrder.workOrderNumber} Unit:{" "}
+            {workOrder.unitNumber}
+          </li>
         ))}
       </ul>
     </Layout>
