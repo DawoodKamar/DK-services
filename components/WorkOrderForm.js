@@ -122,19 +122,32 @@ export default function WorkOrderForm() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // submission logic
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(form);
+  // ------------------------------------------submission logic--------------------------------------------
+  const handleSubmit = (event) => {
+    event.preventDefault(); //prevent page from refreshing
+
+    // The fetch() function is used to send a network request. Here it's sending a POST request to "/api/dk-services".
     fetch("/api/dk-services", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+      method: "POST", // The method of the request is set to "POST".
+      // The body of the request is set to the JSON string representation of the form state. This is the data you're sending through the request.
       body: JSON.stringify(form),
+      // The headers of the request are being set. "Content-Type" is being set to "application/json", which tells the server that we're sending JSON data.
+      headers: { "Content-Type": "application/json" },
     })
-      .then((response) => response.json())
-      .then((data) => console.log(data)) // Or do something with the new work order
-      .catch((error) => console.error(error));
+      .then((response) => {
+        // The response of the fetch request is a Stream object. We're checking to make sure the request was successful. If it wasn't, we throw an error.
+        if (!response.ok) throw new Error(response.statusText);
+        // If the response was okay, we return the JSON data of the response. This is another Promise.
+        return response.json();
+      })
+      .then(() => {
+        // After the JSON data has been received and processed, we reset the form to its initial state.
+        setForm(initialForm);
+      })
+      // If there were any errors in the above steps, they will be caught and logged here.
+      .catch((error) => console.error("Error:", error));
   };
+
   //------------------handle description change-----------------------------
 
   const handleAddDescription = () => {
