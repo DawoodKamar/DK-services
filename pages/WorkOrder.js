@@ -2,6 +2,7 @@ import Link from "next/link";
 import Head from "next/head";
 import Layout from "../components/layout";
 import WorkOrderForm from "../components/WorkOrderForm";
+import Shortcuts from "../components/shortcuts";
 
 export default function WorkOrder() {
   return (
@@ -10,8 +11,7 @@ export default function WorkOrder() {
         <title>Work Order Form</title>
       </Head>
       {/* <DkLogo/> */}
-      <Link href="/WorkOrderList">Submitions</Link>
-      <p>list</p>
+      <Shortcuts />
       <WorkOrderForm />
     </Layout>
   );
