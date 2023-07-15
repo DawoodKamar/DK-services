@@ -30,3 +30,15 @@
   .date {
     text-align: right; /* align text to the right */
   }
+  .link {
+    color: var(--_bg);
+    text-decoration: none;
+    transition-duration: 0.2s;
+    /* color: black; */
+    /* //////////////////////// */
+  }
+  
+  .link :hover {
+    text-decoration: none;
+    color: rgb(82, 80, 120);
+  }

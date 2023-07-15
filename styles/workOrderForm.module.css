@@ -28,7 +28,7 @@
     padding: 0.4rem 1rem;
     background: var(--_nav-links-color);
     font-size: 1rem;
-
+    border-radius: 10px;
     display: inline-block;
     cursor: pointer;
     transition-duration: 0.4s;

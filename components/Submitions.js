@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "../styles/submitions.module.css";
+import Link from "next/link";
 
 export default function Submitions() {
   // useState is a React hook that lets you add state to functional components.
@@ -37,15 +38,23 @@ export default function Submitions() {
         const formattedDate = dateObject.toDateString();
 
         return (
-          <li key={workOrder.id} className={styles.listItem}>
-            <div className={styles.workOrderInfo}>
-              <h4 className={styles.workOrderNumber}>
-                {workOrder.workOrderNumber}
-              </h4>
-              <h5 className={styles.unitNumber}>Unit {workOrder.unitNumber}</h5>
-            </div>
-            <h4 className={styles.date}>{formattedDate}</h4>
-          </li>
+          <Link
+            href={`/work-orders/${workOrder.workOrderNumber}`}
+            key={workOrder.id}
+            className={styles.link}
+          >
+            <li key={workOrder.id} className={styles.listItem}>
+              <div className={styles.workOrderInfo}>
+                <h4 className={styles.workOrderNumber}>
+                  {workOrder.workOrderNumber}
+                </h4>
+                <h5 className={styles.unitNumber}>
+                  Unit {workOrder.unitNumber}
+                </h5>
+              </div>
+              <h4 className={styles.date}>{formattedDate}</h4>
+            </li>
+          </Link>
         );
       })}
     </ul>
