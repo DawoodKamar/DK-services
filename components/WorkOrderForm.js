@@ -124,8 +124,6 @@ export default function WorkOrderForm() {
 
   // ------------------------------------------submission logic--------------------------------------------
   const handleSubmit = (event) => {
-    event.preventDefault(); //prevent page from refreshing
-
     // The fetch() function is used to send a network request. Here it's sending a POST request to "/api/dk-services".
     fetch("/api/dk-services", {
       method: "POST", // The method of the request is set to "POST".
