@@ -14,7 +14,7 @@ export default function SubmittedWorkOrder({ workOrderData }) {
     descriptions,
     parts,
   } = workOrderData;
-
+  console.log(workOrderData);
   return (
     <div>
       <h1>Work Order {workOrderNumber}</h1>

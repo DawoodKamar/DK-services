@@ -22,6 +22,10 @@ export default async function workOrderHandler(req, res) {
       try {
         const workOrder = await prisma.WorkOrder.findUnique({
           where: { workOrderNumber: parseInt(workOrderNumber) },
+          include: {
+            descriptions: true, // This includes the descriptions in the response
+            parts: true, // This includes the parts in the response
+          },
         });
 
         if (!workOrder) {
