@@ -1,3 +1,8 @@
+import Layout from "../../components/layout";
+import Image from "next/image";
+import dk from "../../public/images/dkLogo.jpg";
+import styles from "../../styles/wo.module.css";
+
 export default function SubmittedWorkOrder({ workOrderData }) {
   const {
     workOrderNumber,
@@ -16,37 +21,80 @@ export default function SubmittedWorkOrder({ workOrderData }) {
   } = workOrderData;
   console.log(workOrderData);
   return (
-    <div>
-      <h1>Work Order {workOrderNumber}</h1>
-      <p>Date: {new Date(jobDate).toLocaleDateString()}</p>
-      <p>Client: {client}</p>
-      <p>Address: {address}</p>
-      <p>Street Address: {streetAddress}</p>
-      <p>City: {city}</p>
-      <p>Unit Number: {unitNumber}</p>
-      <p>VIN: {vin}</p>
-      <p>License Plate: {licensePlate}</p>
-      <p>Hubometer: {hubometer}</p>
-      <p>Total Hours: {totalHours}</p>
+    <Layout>
+      <div className={styles.container}>
+        <Image
+          src={dk}
+          alt="dk logo image"
+          placeholder="blur"
+          className={styles.logo}
+        />
 
-      <h2>Descriptions</h2>
-      {descriptions &&
-        descriptions.map((description, index) => (
-          <div key={index}>
-            <p>Description: {description.description}</p>
-            <p>Time: {description.time}</p>
-          </div>
-        ))}
+        <h1>Work Order {workOrderNumber}</h1>
+        <div className={styles.workOrderItem}>
+          <p>Date:</p>
+          <p>{new Date(jobDate).toLocaleDateString()}</p>
+        </div>
+        <div className={styles.workOrderItem}>
+          <p>Client:</p>
+          <p>{client}</p>
+        </div>
+        <div className={styles.workOrderItem}>
+          <p>Address:</p>
+          <p>{address}</p>
+        </div>
+        <div className={styles.workOrderItem}>
+          <p>Street Address:</p>
+          <p>{streetAddress}</p>
+        </div>
+        <div className={styles.workOrderItem}>
+          <p>City:</p>
+          <p>{city}</p>
+        </div>
+        <div className={styles.workOrderItem}>
+          <p>Unit Number:</p>
+          <p>{unitNumber}</p>
+        </div>
+        <div className={styles.workOrderItem}>
+          <p>VIN:</p>
+          <p>{vin}</p>
+        </div>
+        <div className={styles.workOrderItem}>
+          <p>License Plate:</p>
+          <p>{licensePlate}</p>
+        </div>
+        <div className={styles.workOrderItem}>
+          <p>Hubometer:</p>
+          <p>{hubometer}</p>
+        </div>
+        <div className={styles.workOrderItem}>
+          <p>Total Hours:</p>
+          <p>{totalHours}</p>
+        </div>
 
-      <h2>Parts</h2>
-      {parts &&
-        parts.map((part, index) => (
-          <div key={index}>
-            <p>Quantity: {part.quantity}</p>
-            <p>Part: {part.part}</p>
-          </div>
-        ))}
-    </div>
+        <h2>Descriptions</h2>
+        {descriptions &&
+          descriptions.map((description, index) => (
+            <div key={index} className={styles.workOrderItem}>
+              <p>Description:</p>
+              <p>{description.description}</p>
+              <p>Time:</p>
+              <p>{description.time}</p>
+            </div>
+          ))}
+
+        <h2>Parts</h2>
+        {parts &&
+          parts.map((part, index) => (
+            <div key={index} className={styles.workOrderItem}>
+              <p>Quantity:</p>
+              <p>{part.quantity}</p>
+              <p>Part:</p>
+              <p>{part.part}</p>
+            </div>
+          ))}
+      </div>
+    </Layout>
   );
 }
 
