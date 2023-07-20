@@ -29,68 +29,43 @@ export default function SubmittedWorkOrder({ workOrderData }) {
           placeholder="blur"
           className={styles.logo}
         />
-
         <h1>Work Order {workOrderNumber}</h1>
-        <div className={styles.workOrderItem}>
-          <p>Date:</p>
-          <p>{new Date(jobDate).toLocaleDateString()}</p>
+
+        <div className={styles.workOrderInfo}>
+          <div className={styles.client}>
+            <p>Date: &emsp;{new Date(jobDate).toLocaleDateString()}</p>
+            <p>Client: &emsp;{client}</p>
+            <p>Address: &emsp;{address}</p>
+            <p>City: &emsp;{city}</p>
+          </div>
+
+          <div className={styles.workOrderUnit}>
+            <p>Unit Number: &emsp;{unitNumber}</p>
+            <p>License Plate: &emsp;{licensePlate}</p>
+            <p>Hubometer: &emsp;{hubometer}</p>
+            <p>VIN: {vin}</p>
+          </div>
         </div>
-        <div className={styles.workOrderItem}>
-          <p>Client:</p>
-          <p>{client}</p>
-        </div>
-        <div className={styles.workOrderItem}>
-          <p>Address:</p>
-          <p>{address}</p>
-        </div>
-        <div className={styles.workOrderItem}>
-          <p>Street Address:</p>
-          <p>{streetAddress}</p>
-        </div>
-        <div className={styles.workOrderItem}>
-          <p>City:</p>
-          <p>{city}</p>
-        </div>
-        <div className={styles.workOrderItem}>
-          <p>Unit Number:</p>
-          <p>{unitNumber}</p>
-        </div>
-        <div className={styles.workOrderItem}>
-          <p>VIN:</p>
-          <p>{vin}</p>
-        </div>
-        <div className={styles.workOrderItem}>
-          <p>License Plate:</p>
-          <p>{licensePlate}</p>
-        </div>
-        <div className={styles.workOrderItem}>
-          <p>Hubometer:</p>
-          <p>{hubometer}</p>
-        </div>
+
         <div className={styles.workOrderItem}>
           <p>Total Hours:</p>
           <p>{totalHours}</p>
         </div>
-
         <h2>Descriptions</h2>
         {descriptions &&
           descriptions.map((description, index) => (
             <div key={index} className={styles.workOrderItem}>
-              <p>Description:</p>
               <p>{description.description}</p>
-              <p>Time:</p>
-              <p>{description.time}</p>
+              <p>{description.time} hours</p>
             </div>
           ))}
-
         <h2>Parts</h2>
         {parts &&
           parts.map((part, index) => (
-            <div key={index} className={styles.workOrderItem}>
-              <p>Quantity:</p>
-              <p>{part.quantity}</p>
-              <p>Part:</p>
-              <p>{part.part}</p>
+            <div key={index}>
+              <p>
+                {part.quantity} &emsp;  {part.part}
+              </p>
             </div>
           ))}
       </div>

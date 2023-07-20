@@ -1,9 +1,21 @@
 .container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+
+    max-width: 1100px;
+
+    /* align-items: center; */
+    padding: 10px;
     /* gap: 0.2em; */
-    margin: 2em 0;
+    margin: 2em auto;
+  }
+
+  .workOrderInfo {
+    display: flex;
+    justify-content: space-between;
+  }
+  .workOrderUnit{
+    order: -1;
   }
 
   .logo {
@@ -17,20 +29,22 @@
     }
   }
 
+  .parts {
+    display: flex;
+    flex-direction: column;
+  }
+
   
   .workOrderItem {
     display: flex;
     justify-content: space-between;
-    /* gap: 1em; */
-    /* background-color: #f3f3f3; */
-    border-bottom: 1px solid black;
-
-    /* border-radius: 4px; */
+    gap: 1em;
     width: 100%;
     max-width: 600px;
   }
   
   .workOrderItem > div {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
   }
