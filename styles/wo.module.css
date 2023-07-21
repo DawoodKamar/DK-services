@@ -3,9 +3,10 @@
     flex-direction: column;
 
     max-width: 1100px;
+    /* background-color: rgb(243, 243, 243); */
 
     /* align-items: center; */
-    padding: 10px;
+    padding: 10px 5%;
     /* gap: 0.2em; */
     margin: 2em auto;
   }
@@ -13,6 +14,7 @@
   .workOrderInfo {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap-reverse;
   }
   .workOrderUnit{
     order: -1;
@@ -21,6 +23,7 @@
   .logo {
     width: 600px;
     height: auto;
+    margin: 0 auto;
   }
 
   @media (max-width: 768px) { 
@@ -29,18 +32,34 @@
     }
   }
 
+  .descriptionItem{
+    display: flex;
+ 
+  }
+  .descriptionDetails{
+    max-width: 70%;
+  }
+  .descriptionTime{
+    margin-left: auto;
+
+  }
+
   .parts {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .parts > div {
+    width: 40%;
+    border-bottom: 1px solid rgb(0, 0, 0);
   }
 
   
   .workOrderItem {
     display: flex;
-    justify-content: space-between;
-    gap: 1em;
-    width: 100%;
-    max-width: 600px;
+    justify-content: space-around;
+    border: 2px solid rgb(0, 0, 0);
   }
   
   .workOrderItem > div {

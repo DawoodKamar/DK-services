@@ -2,6 +2,7 @@ import Layout from "../../components/layout";
 import Image from "next/image";
 import dk from "../../public/images/dkLogo.jpg";
 import styles from "../../styles/wo.module.css";
+import Shortcuts from "../../components/shortcuts";
 
 export default function SubmittedWorkOrder({ workOrderData }) {
   const {
@@ -22,6 +23,7 @@ export default function SubmittedWorkOrder({ workOrderData }) {
   console.log(workOrderData);
   return (
     <Layout>
+        <Shortcuts/>
       <div className={styles.container}>
         <Image
           src={dk}
@@ -43,31 +45,33 @@ export default function SubmittedWorkOrder({ workOrderData }) {
             <p>Unit Number: &emsp;{unitNumber}</p>
             <p>License Plate: &emsp;{licensePlate}</p>
             <p>Hubometer: &emsp;{hubometer}</p>
-            <p>VIN: {vin}</p>
+            <p>VIN:&emsp; {vin}</p>
           </div>
         </div>
 
-        <div className={styles.workOrderItem}>
-          <p>Total Hours:</p>
-          <p>{totalHours}</p>
-        </div>
+        
         <h2>Descriptions</h2>
         {descriptions &&
           descriptions.map((description, index) => (
-            <div key={index} className={styles.workOrderItem}>
-              <p>{description.description}</p>
-              <p>{description.time} hours</p>
+            <div key={index} className={styles.descriptionItem}>
+              <p className={styles.descriptionDetails}>{description.description}</p>
+              <p className={styles.descriptionTime}>{description.time} hours</p>
             </div>
           ))}
+          <div className={styles.workOrderItem}>
+          <p>Total Hours:</p>
+          <p>{totalHours}</p>
+        </div>
         <h2>Parts</h2>
+        <div className={styles.parts}>
         {parts &&
           parts.map((part, index) => (
-            <div key={index}>
+            <div key={index} >
               <p>
                 {part.quantity} &emsp;  {part.part}
               </p>
             </div>
-          ))}
+          ))}</div>
       </div>
     </Layout>
   );
