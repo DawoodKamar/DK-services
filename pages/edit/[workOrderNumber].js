@@ -1,70 +1,250 @@
 import Layout from "../../components/layout";
-import styles from "../../styles/wo.module.css";//----------------------------------------------------------------
+import styles from "../../styles/workOrderForm.module.css"; //----------------------------------------------------------------
 import Shortcuts from "../../components/shortcuts";
+import React, { useState, useEffect } from "react";
 
 export default function EditWorkOrder({ workOrderData }) {
-  const {
-    workOrderNumber,
-    jobDate,
-    client,
-    address,
-    city,
-    unitNumber,
-    vin,
-    licensePlate,
-    hubometer,
-    totalHours,
-    descriptions,
-    parts,
-  } = workOrderData;
-  console.log(workOrderData);
+  const [formState, setFormState] = useState({
+    workOrderNumber: workOrderData.workOrderNumber,
+    jobDate: new Date(workOrderData.jobDate).toISOString().split("T")[0],
+    client: workOrderData.client,
+    address: workOrderData.address,
+    city: workOrderData.city,
+    unitNumber: workOrderData.unitNumber,
+    vin: workOrderData.vin,
+    licensePlate: workOrderData.licensePlate,
+    hubometer: workOrderData.hubometer,
+    totalHours: workOrderData.totalHours,
+    descriptions: workOrderData.descriptions,
+    parts: workOrderData.parts,
+  });
+  const handleChange = (e) => {
+    setFormState({
+      ...formState,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // Here, write your logic for form submission
+  };
+
+  //------------------handle description change-----------------------------
+
+  const handleAddDescription = () => {
+    setFormState((prevState) => ({
+      ...prevState,
+      descriptions: [...prevState.descriptions, { description: "", time: "" }],
+    }));
+  };
+
+  const handleDescriptionChange = (e, index) => {
+    const newDescriptions = [...formState.descriptions];
+    newDescriptions[index].description = e.target.value;
+    setFormState((prevState) => ({
+      ...prevState,
+      descriptions: newDescriptions,
+    }));
+    updateStateAndCalculateTotalHours(newDescriptions);
+  };
+
+  const handleTimeChange = (e, index) => {
+    const newDescriptions = [...formState.descriptions];
+    newDescriptions[index].time = parseFloat(e.target.value) || 0;
+    setFormState((prevState) => ({
+      ...prevState,
+      descriptions: newDescriptions,
+    }));
+    updateStateAndCalculateTotalHours(newDescriptions);
+  };
+
+  const handleRemoveDescription = (index) => {
+    const newDescriptions = [...formState.descriptions];
+    newDescriptions.splice(index, 1);
+    setFormState((prevState) => ({
+      ...prevState,
+      descriptions: newDescriptions,
+    }));
+    updateStateAndCalculateTotalHours(newDescriptions);
+  };
+
+  //------------------handle part change-----------------------------
+  const handleAddPart = () => {
+    setFormState((prevState) => ({
+      ...prevState,
+      parts: [...prevState.parts, { quantity: "1", part: "" }],
+    }));
+  };
+
+  const handlePartChange = (e, index) => {
+    const newParts = [...formState.parts];
+    newParts[index].part = e.target.value;
+    setFormState((prevState) => ({ ...prevState, parts: newParts }));
+  };
+
+  const handleRemovePart = (index) => {
+    const newParts = [...formState.parts];
+    newParts.splice(index, 1);
+    setFormState((prevState) => ({ ...prevState, parts: newParts }));
+  };
+
+  const handleQuantityChange = (e, index) => {
+    const newParts = [...formState.parts];
+    newParts[index].quantity = e.target.value;
+    setFormState((prevState) => ({ ...prevState, parts: newParts }));
+  };
+
+  //------------------handle total hours-----------------------------
+  const updateStateAndCalculateTotalHours = (newDescriptions) => {
+    const total = newDescriptions.reduce(
+      (sum, item) => sum + parseFloat(item.time || 0),
+      0
+    );
+    setFormState((prevState) => ({
+      ...prevState,
+      descriptions: newDescriptions,
+      totalHours: total,
+    }));
+  };
+
   return (
     <Layout>
-        <Shortcuts/>
-      {/* <div className={styles.container}>
-        <h1>Work Order {workOrderNumber}</h1>
+      <Shortcuts />
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <h1>Work Order Form</h1>
+        <hr />
+        <label>
+          Work Order Number:
+          <input
+            type="number"
+            name="workOrderNumber"
+            onChange={handleChange}
+            value={formState.workOrderNumber}
+          />
+        </label>
+        <label>
+          Job Date:
+          <input
+            type="date"
+            name="jobDate"
+            value={formState.jobDate}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Client:
+          <input
+            type="text"
+            name="client"
+            onChange={handleChange}
+            value={formState.client}
+          />
+        </label>
+        <label>
+          Address:
+          <input
+            type="text"
+            name="address"
+            onChange={handleChange}
+            value={formState.address}
+          />
+        </label>
 
-        <div className={styles.workOrderInfo}>
-          <div className={styles.client}>
-            <p>Date: &emsp;{new Date(jobDate).toLocaleDateString()}</p>
-            <p>Client: &emsp;{client}</p>
-            <p>Address: &emsp;{address}</p>
-            <p>City: &emsp;{city}</p>
-          </div>
-
-          <div className={styles.workOrderUnit}>
-            <p>Unit Number: &emsp;{unitNumber}</p>
-            <p>License Plate: &emsp;{licensePlate}</p>
-            <p>Hubometer: &emsp;{hubometer}</p>
-            <p>VIN:&emsp; {vin}</p>
-          </div>
-        </div>
-
-        
-        <h2>Descriptions</h2>
-        {descriptions &&
-          descriptions.map((description, index) => (
-            <div key={index} className={styles.descriptionItem}>
-              <p className={styles.descriptionDetails}>{description.description}</p>
-              <p className={styles.descriptionTime}>{description.time} hours</p>
-            </div>
+        <label>
+          City:
+          <input
+            type="text"
+            name="city"
+            onChange={handleChange}
+            value={formState.city}
+          />
+        </label>
+        <label>
+          Unit Number:
+          <input
+            type="text"
+            name="unitNumber"
+            onChange={handleChange}
+            value={formState.unitNumber}
+          />
+        </label>
+        <label>
+          VIN:
+          <input
+            type="text"
+            name="vin"
+            onChange={handleChange}
+            value={formState.vin}
+          />
+        </label>
+        <label>
+          License Plate:
+          <input
+            type="text"
+            name="licensePlate"
+            onChange={handleChange}
+            value={formState.licensePlate}
+          />
+        </label>
+        <label>
+          Hubometer:
+          <input
+            type="text"
+            name="hubometer"
+            onChange={handleChange}
+            value={formState.hubometer}
+          />
+        </label>
+        <p>Description</p>
+        {formState.descriptions &&
+          formState.descriptions.map((description, index) => (
+            <DescriptionInput
+              key={index}
+              description={description.description}
+              time={description.time}
+              index={index}
+              handleDescriptionChange={(e) => handleDescriptionChange(e, index)}
+              handleTimeChange={(e) => handleTimeChange(e, index)}
+              handleRemove={() => handleRemoveDescription(index)}
+            />
           ))}
-          <div className={styles.workOrderItem}>
-          <p>Total Hours:</p>
-          <p>{totalHours}</p>
-        </div>
-        <h2>Parts</h2>
-        <div className={styles.parts}>
-        {parts &&
-          parts.map((part, index) => (
-            <div key={index} >
-              <p>
-                {part.quantity} &emsp;  {part.part}
-              </p>
-            </div>
-          ))}</div>
-      </div>*/}
-    </Layout> 
+        <button type="button" onClick={handleAddDescription}>
+          Add Description
+        </button>
+        <p>Parts</p>
+        <label>
+          {formState.parts &&
+            formState.parts.map((part, index) => (
+              <PartsInput
+                key={index}
+                parts={part.part}
+                quantity={part.quantity}
+                index={index}
+                handleQuantityChange={(e) => handleQuantityChange(e, index)}
+                handlePartChange={(e) => handlePartChange(e, index)}
+                handleRemove={() => handleRemovePart(index)}
+              />
+            ))}
+        </label>
+        <button type="button" onClick={handleAddPart}>
+          Add Part
+        </button>
+
+        <label>
+          Total Hours:
+          <input
+            type="number"
+            name="totalHours"
+            value={formState.totalHours}
+            onChange={handleChange}
+            readOnly
+          />
+        </label>
+        <button type="submit">Update Work Order</button>
+      </form>
+    </Layout>
   );
 }
 
@@ -90,4 +270,105 @@ export async function getServerSideProps(context) {
   return {
     props: { workOrderData: data },
   };
+}
+
+//--------------------------------------growing text area component----------------------------------------------------------
+function GrowingTextarea({ value, onChange, ...props }) {
+  const textareaRef = React.useRef(null);
+
+  () => {
+    const textarea = textareaRef.current; // Reset the height to auto to shrink
+    textarea.style.height = "auto"; // Set the height to the scrollHeight so it grows
+    textarea.style.height = textarea.scrollHeight + "px";
+  };
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height =
+        textareaRef.current.scrollHeight + "px";
+    }
+  }, [value]);
+
+  return (
+    <textarea
+      ref={textareaRef}
+      value={value}
+      onChange={onChange}
+      {...props}
+      style={{ overflow: "hidden", resize: "none" }}
+    />
+  );
+}
+
+//--------------------------------------description component----------------------------------------------------------
+function DescriptionInput({
+  description,
+  time,
+  index,
+  handleDescriptionChange,
+  handleTimeChange,
+  handleRemove,
+}) {
+  return (
+    <div className={styles.description}>
+      <label>
+        {index + 1}:
+        <GrowingTextarea
+          value={description}
+          name={`description${index}`}
+          onChange={(e) => handleDescriptionChange(e, index)}
+        />
+      </label>
+      <label>
+        Time:
+        <input
+          type="number"
+          step="0.25"
+          value={time}
+          name={`time${index}`}
+          onChange={handleTimeChange}
+        />
+      </label>
+      <button type="button" onClick={handleRemove}>
+        Remove
+      </button>
+    </div>
+  );
+}
+
+//--------------------------------------parts component----------------------------------------------------------
+
+function PartsInput({
+  parts,
+  quantity,
+  index,
+  handleQuantityChange,
+  handlePartChange,
+  handleRemove,
+}) {
+  return (
+    <div>
+      <label>
+        Quantity:
+        <input
+          type="text"
+          value={quantity}
+          name={`quantity${index}`}
+          onChange={handleQuantityChange}
+        />
+      </label>
+      <label>
+        Part:
+        <input
+          type="text"
+          name={`part${index}`}
+          value={parts}
+          onChange={handlePartChange}
+        />
+      </label>
+      <button type="button" onClick={handleRemove}>
+        Remove
+      </button>
+    </div>
+  );
 }

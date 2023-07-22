@@ -19,7 +19,6 @@ export default function SubmittedWorkOrder({ workOrderData }) {
     descriptions,
     parts,
   } = workOrderData;
-  console.log(workOrderData);
   return (
     <Layout>
         <Shortcuts workOrderNumber={workOrderNumber} displayMode="Edit"/>
