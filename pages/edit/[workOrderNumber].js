@@ -1,10 +1,8 @@
 import Layout from "../../components/layout";
-import Image from "next/image";
-import dk from "../../public/images/dkLogo.jpg";
-import styles from "../../styles/wo.module.css";
+import styles from "../../styles/wo.module.css";//----------------------------------------------------------------
 import Shortcuts from "../../components/shortcuts";
 
-export default function SubmittedWorkOrder({ workOrderData }) {
+export default function EditWorkOrder({ workOrderData }) {
   const {
     workOrderNumber,
     jobDate,
@@ -22,14 +20,8 @@ export default function SubmittedWorkOrder({ workOrderData }) {
   console.log(workOrderData);
   return (
     <Layout>
-        <Shortcuts workOrderNumber={workOrderNumber} displayMode="Edit"/>
-      <div className={styles.container}>
-        <Image
-          src={dk}
-          alt="dk logo image"
-          placeholder="blur"
-          className={styles.logo}
-        />
+        <Shortcuts/>
+      {/* <div className={styles.container}>
         <h1>Work Order {workOrderNumber}</h1>
 
         <div className={styles.workOrderInfo}>
@@ -71,8 +63,8 @@ export default function SubmittedWorkOrder({ workOrderData }) {
               </p>
             </div>
           ))}</div>
-      </div>
-    </Layout>
+      </div>*/}
+    </Layout> 
   );
 }
 
