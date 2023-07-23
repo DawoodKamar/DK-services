@@ -40,8 +40,21 @@ export default async function workOrderHandler(req, res) {
       }
       break;
 
+    case "DELETE":
+      try {
+        const deletedWorkOrder = await prisma.WorkOrder.delete({
+          where: { workOrderNumber: parseInt(workOrderNumber) },
+        });
+
+        res.status(200).json(deletedWorkOrder);
+      } catch (e) {
+        console.error("Request error", e);
+        res.status(500).json({ error: "Error deleting work order" });
+      }
+      break;
+
     default:
-      res.setHeader("Allow", ["GET"]);
+      res.setHeader("Allow", ["GET", "DELETE"]);
       res.status(405).end(`Method ${method} Not Allowed`);
   }
 }

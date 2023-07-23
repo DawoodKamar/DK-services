@@ -24,11 +24,37 @@ export default function EditWorkOrder({ workOrderData }) {
       [e.target.name]: e.target.value,
     });
   };
-
+  //------------------------------------submit logic--------------------------------
   const handleSubmit = (event) => {
-    event.preventDefault();
-
-    // Here, write your logic for form submission
+    // First, delete the existing work order
+    fetch(`/api/work-orders/${formState.workOrderNumber}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((response) => {
+        // The response of the fetch request is a Stream object. We're checking to make sure the request was successful. If it wasn't, we throw an error.
+        if (!response.ok) throw new Error(response.statusText);
+        // If the delete was successful, we'l l make a POST request to create a new work order.
+        return fetch("/api/dk-services", {
+          method: "POST", // The method of the request is set to "POST".
+          // The body of the request is set to the JSON string representation of the form state. This is the data you're sending through the request.
+          body: JSON.stringify(form),
+          // The headers of the request are being set. "Content-Type" is being set to "application/json", which tells the server that we're sending JSON data.
+          headers: { "Content-Type": "application/json" },
+        });
+      })
+      .then((response) => {
+        // Check if the POST was successful.
+        if (!response.ok) throw new Error(response.statusText);
+        // If the response was okay, we return the JSON data of the response. This is another Promise.
+        return response.json();
+      })
+      .then(() => {
+        // After the JSON data has been received and processed, we reset the form to its initial state.
+        setForm(initialForm);
+      })
+      // If there were any errors in the above steps, they will be caught and logged here.
+      .catch((error) => console.error("Error:", error));
   };
 
   //------------------handle description change-----------------------------
