@@ -30,20 +30,36 @@ export default function EditWorkOrder({ workOrderData }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Strip off the workOrderId from descriptions and parts
+    // Map over the descriptions in the form state, removing the `workOrderId` from each object.
+    // We're using object destructuring to achieve this.
+    // `workOrderId` gets its own variable, and `...rest` represents the rest of the properties in the object.
+    // Because we're only using `...rest` in the returned object, `workOrderId` gets omitted.
     const descriptions = formState.descriptions.map(
       ({ workOrderId, ...rest }) => rest
     );
+
+    // Doing the same thing for parts as we did for descriptions.
     const parts = formState.parts.map(({ workOrderId, ...rest }) => rest);
 
+    // Constructing a new object to send to the server. This is based on the form state,
+    // but we're replacing the `descriptions` and `parts` arrays with the ones we just created,
+    // which don't include the `workOrderId` property in their objects.
     const dataToSend = { ...formState, descriptions, parts };
 
+    // Making a fetch request to the server to delete an existing work order.
+    // The URL includes the work order number from the form state.
+    // We're specifying that this should be a DELETE request by setting the `method` property to "DELETE".
     fetch(`/api/work-orders/${formState.workOrderNumber}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => {
+        // If the server responds with an error status, we throw an error to be caught in the catch block.
         if (!response.ok) throw new Error(response.statusText);
+
+        // If the server responded successfully, we make another fetch request.
+        // This time, we're making a POST request to a different URL, and we're sending `dataToSend` as the request body.
+        // We're stringifying `dataToSend` because the server expects to receive a string, not a JavaScript object.
         return fetch("/api/dk-services", {
           method: "POST",
           body: JSON.stringify(dataToSend),
@@ -51,65 +67,25 @@ export default function EditWorkOrder({ workOrderData }) {
         });
       })
       .then((response) => {
+        // Again, if the server responds with an error status, we throw an error to be caught in the catch block.
         if (!response.ok) throw new Error(response.statusText);
+
+        // If the server responded successfully, we parse the response body as JSON.
+        // This returns a Promise that resolves with the parsed JSON data.
         return response.json();
       })
       .then(() => {
+        // After all the fetch requests have completed and the responses have been handled,
+        // we reset the form state to its initial state.
         setFormState(initialFormState);
       })
-      .catch((error) => console.error("Error:", error));
+      .catch((error) => {
+        // If an error was thrown at any point in the above code, it gets caught here.
+        // We're logging the error to the console.
+        console.error("Error:", error);
+      });
   };
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   // First, delete the existing work order
-  //   fetch(`/api/work-orders/${formState.workOrderNumber}`, {
-  //     method: "DELETE",
-  //     headers: { "Content-Type": "application/json" },
-  //   })
-  //     .then((response) => {
-  //       // The response of the fetch request is a Stream object. We're checking to make sure the request was successful. If it wasn't, we throw an error.
-  //       if (!response.ok) throw new Error(response.statusText);
-  //       // If the delete was successful, we'l l make a POST request to create a new work order.
-  //       return fetch("/api/dk-services", {
-  //         method: "POST", // The method of the request is set to "POST".
-  //         // The body of the request is set to the JSON string representation of the form state. This is the data you're sending through the request.
-  //         body: JSON.stringify(formState),
-  //         // The headers of the request are being set. "Content-Type" is being set to "application/json", which tells the server that we're sending JSON data.
-  //         headers: { "Content-Type": "application/json" },
-  //       });
-  //     })
-  //     .then((response) => {
-  //       // Check if the POST was successful.
-  //       if (!response.ok) throw new Error(response.statusText);
-  //       // If the response was okay, we return the JSON data of the response. This is another Promise.
-  //       return response.json();
-  //     })
-  //     .then(() => {
-  //       // After the JSON data has been received and processed, we reset the form to its initial state.
-  //       setForm(initialForm);
-  //     })
-  //     // If there were any errors in the above steps, they will be caught and logged here.
-  //     .catch((error) => console.error("Error:", error));
-  // };
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   fetch(`/api/work-orders/${formState.workOrderNumber}`, {
-  //     method: "DELETE",
-  //     headers: { "Content-Type": "application/json" },
-  //   })
-  //     .then((response) => {
-  //       if (!response.ok) throw new Error(response.statusText);
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       console.log("Deleted work order: ", data);
-  //       // Reset the form or perform other actions after successful deletion
-  //       setForm(initialForm);
-  //     })
-  //     .catch((error) => console.error("Error:", error));
-  // };
   //------------------handle description change-----------------------------
 
   const handleAddDescription = () => {

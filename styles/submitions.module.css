@@ -4,6 +4,9 @@
     margin: auto;
     list-style-type: none;
     padding: 0 5px 0 5px;
+    display: flex;
+    flex-direction: column-reverse;
+    
 }
 
 .listItem {
