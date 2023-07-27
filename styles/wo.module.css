@@ -6,9 +6,9 @@
     /* background-color: rgb(243, 243, 243); */
 
     /* align-items: center; */
-    padding: 10px 5%;
+    padding: 0 5% 10px 5%;
     /* gap: 0.2em; */
-    margin: 2em auto;
+    margin: 0 auto 1em auto;
   }
 
   .workOrderInfo {
