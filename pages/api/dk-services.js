@@ -11,8 +11,35 @@ export default async function assetHandler(req, res) {
     case "GET":
       // This block of code will execute if the HTTP method is GET.
       try {
-        // Fetches all work orders from the database.
-        const workOrders = await prisma.WorkOrder.findMany();
+        const searchQuery = req.query.search || "";
+        const parsedQueryNumber = parseInt(searchQuery);
+        const parsedQueryDate = new Date(searchQuery);
+
+        // Check if the parsed values are valid numbers or dates
+        const validNumberQuery = !isNaN(parsedQueryNumber)
+          ? parsedQueryNumber
+          : undefined;
+        const validDateQuery = !isNaN(parsedQueryDate.getTime())
+          ? parsedQueryDate
+          : undefined;
+
+        const workOrders = await prisma.WorkOrder.findMany({
+          where: {
+            OR: [
+              { workOrderNumber: validNumberQuery },
+              { jobDate: validDateQuery },
+              { client: { contains: searchQuery } },
+              { address: { contains: searchQuery } },
+              { streetAddress: { contains: searchQuery } },
+              { city: { contains: searchQuery } },
+              { unitNumber: { contains: searchQuery } },
+              { vin: { contains: searchQuery } },
+              { licensePlate: { contains: searchQuery } },
+              { hubometer: { contains: searchQuery } },
+              { totalHours: validNumberQuery },
+            ],
+          },
+        });
 
         // Sends the fetched work orders back in the response with a status code of 200, which means "OK".
         res.status(200).json(workOrders);

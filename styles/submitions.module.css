@@ -1,3 +1,41 @@
+.searchContainer{
+  width: 100dvw;
+  max-width: 1000px;
+  margin: auto;
+  padding: 0 10px 10px 10px;
+
+}
+.searchTerm{
+  width: 100%;
+  border: 1px solid #595959;
+  border-radius: 10px;  
+  font-size: 1rem;
+  padding: 0.4rem 1rem;
+  margin-bottom: 10px;
+}
+
+.search, .clearSearch{
+  padding: 0.4rem 1rem;
+  background: var(--_nav-links-color);
+  font-size: 1rem;
+  border-radius: 10px;
+  display: inline-block;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+.clearSearch{
+float: right;
+}
+
+.search:hover, .clearSearch:hover{
+  box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 9px 25px 0 rgba(0,0,0,0.19);
+}
+
+
+
+
+
 .list{
     width: 100dvw;
     max-width: 1000px;
