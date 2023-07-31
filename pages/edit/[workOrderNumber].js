@@ -2,6 +2,7 @@ import Layout from "../../components/layout";
 import styles from "../../styles/workOrderForm.module.css"; //----------------------------------------------------------------
 import Shortcuts from "../../components/shortcuts";
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function EditWorkOrder({ workOrderData }) {
   const initialFormState = {
@@ -27,6 +28,7 @@ export default function EditWorkOrder({ workOrderData }) {
     });
   };
   //------------------------------------submit logic--------------------------------
+  const router = useRouter();
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -75,13 +77,62 @@ export default function EditWorkOrder({ workOrderData }) {
         return response.json();
       })
       .then(() => {
-        // After all the fetch requests have completed and the responses have been handled,
-        // we reset the form state to its initial state.
-        setFormState(initialFormState);
+        router.push("/WorkOrderList"); // Redirect to the target route
       })
       .catch((error) => {
         // If an error was thrown at any point in the above code, it gets caught here.
         // We're logging the error to the console.
+        console.error("Error:", error);
+      });
+  };
+  //------------------------------handle submit as new -------------------------------------
+  // This function is triggered when the form is submitted as a new work order.
+  const handleSubmitAsNew = (event) => {
+    // We prevent the default form submission event to avoid a page refresh.
+    event.preventDefault();
+
+    // We destructure the formState object into individual properties.
+    // The 'id', 'descriptions', and 'parts' properties are extracted separately,
+    // and the rest of the properties (e.g., workOrderNumber, jobDate, client, etc.) are stored in 'rest'.
+    const { id, descriptions, parts, ...rest } = formState;
+
+    // For each item in the 'descriptions' array, we create a new object that includes all properties
+    // except for 'id' and 'workOrderId'. This effectively removes 'id' and 'workOrderId' from each item.
+    const newDescriptions = descriptions.map(
+      ({ id, workOrderId, ...rest }) => rest
+    );
+
+    // We do the same for each item in the 'parts' array.
+    const newParts = parts.map(({ id, workOrderId, ...rest }) => rest);
+
+    // We construct the data that will be sent to the server. This includes all properties from 'rest',
+    // as well as our newly created 'descriptions' and 'parts' arrays.
+    const dataToSend = {
+      ...rest,
+      descriptions: newDescriptions,
+      parts: newParts,
+    };
+
+    // We send a POST request to the server with our data. The data is converted to a JSON string
+    // and included in the body of the request.
+    fetch("/api/dk-services", {
+      method: "POST",
+      body: JSON.stringify(dataToSend),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((response) => {
+        // If the server responds with a status that indicates an error (not ok), we throw an error.
+        if (!response.ok) throw new Error(response.statusText);
+
+        // If the server responds with a status that indicates success (ok),
+        // we convert the response body to a JavaScript object (or array).
+        return response.json();
+      })
+      .then(() => {
+        router.push("/WorkOrderList"); // Redirect to the target route
+      })
+      .catch((error) => {
+        // If there's any error during this process, we log the error to the console.
         console.error("Error:", error);
       });
   };
@@ -297,7 +348,18 @@ export default function EditWorkOrder({ workOrderData }) {
             readOnly
           />
         </label>
-        <button type="submit">Update Work Order</button>
+        <div className={styles.submitButtons}>
+          <button type="submit" className={styles.update}>
+            Update Work Order
+          </button>
+          <button
+            type="button"
+            onClick={handleSubmitAsNew}
+            className={styles.new}
+          >
+            Submit as New Work Order
+          </button>
+        </div>
       </form>
     </Layout>
   );

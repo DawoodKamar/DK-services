@@ -37,3 +37,19 @@
 .form button:hover {
     box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 9px 25px 0 rgba(0,0,0,0.19);
 }
+
+.submitButtons {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 600px) {
+   
+    .submitButtons {
+        flex-direction: column;
+        gap: 1em;
+    }
+
+}
+
+
