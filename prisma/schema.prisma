@@ -8,13 +8,18 @@ datasource db {
   relationMode = "prisma"
 }
 
-model Star {
-  id            Int      @id @default(autoincrement())
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  name          String   @db.VarChar(255)
-  constellation String   @db.VarChar(255)
+model UserRoles {
+  googleUserId String @id
+  role         Role   @default(demo)
+
+  @@map("user_roles")
 }
+
+enum Role {
+  admin
+  demo
+}
+
 
 model WorkOrder {
   id              Int           @id @default(autoincrement())
