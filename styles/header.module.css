@@ -53,11 +53,13 @@
     gap: 1rem;
     margin: 0;
     padding: 0;
+    align-items: center;
   }
   
   .navbar li {
     margin-right: 10px;
     color: var(--_nav-links-color);
+  
 
   }
 
@@ -93,6 +95,7 @@
 
   .hamburgerMenu {
     display: none;
+    margin-left: 10px;
   }
 
   .hamburgerMenu .line {

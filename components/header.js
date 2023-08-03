@@ -2,6 +2,7 @@
 import Link from "next/link";
 import styles from "../styles/header.module.css";
 import React, { useState, useEffect, useRef } from "react";
+import { UserButton, SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
 
 // const DkLogo = () => (
 //   <Image
@@ -75,6 +76,7 @@ export default function Header() {
           {" "}
           DK Services
         </Link>
+        <UserButton afterSignOutUrl="/" />
         <div
           className={`${styles.hamburgerMenu} ${showMenu ? styles.open : ""}`}
           onClick={toggleMenu}
@@ -106,6 +108,9 @@ export default function Header() {
             </li>
             <li>
               <Link href="/WorkOrderList">Mechanic Login</Link>
+            </li>
+            <li>
+              <UserButton afterSignOutUrl="/" />
             </li>
           </ul>
         </nav>
@@ -139,6 +144,7 @@ export default function Header() {
               Mechanic Login
             </Link>
           </li>
+          <div className={styles.lines}></div>
         </ul>
       </nav>
     </header>
