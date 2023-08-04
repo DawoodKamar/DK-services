@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "../styles/footer.module.css";
+import { UserButton, SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
 
 export default function Footer() {
   return (
@@ -26,9 +27,18 @@ export default function Footer() {
               <Link href="/Contact">Contact</Link>
             </li>
             <div className={styles.lines}></div>
-            <li>
-              <Link href="/WorkOrderList">Mechanic Login</Link>
-            </li>
+            <SignedIn>
+              <li>
+                <Link href="/WorkOrderList">Work Orders</Link>
+              </li>
+            </SignedIn>
+            <SignedOut>
+              <li>
+                <SignInButton mode="modal" redirectUrl="/WorkOrderList">
+                  <Link href="/">Mechanic Login</Link>
+                </SignInButton>
+              </li>
+            </SignedOut>
           </ul>
         </nav>
       </div>

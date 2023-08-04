@@ -76,7 +76,6 @@ export default function Header() {
           {" "}
           DK Services
         </Link>
-        <UserButton afterSignOutUrl="/" />
         <div
           className={`${styles.hamburgerMenu} ${showMenu ? styles.open : ""}`}
           onClick={toggleMenu}
@@ -106,12 +105,27 @@ export default function Header() {
             <li>
               <Link href="/Contact">Contact</Link>
             </li>
-            <li>
+            <SignedIn>
+              <li>
+                <Link href="/WorkOrderList">Work Orders</Link>
+              </li>
+              <li>
+                <UserButton afterSignOutUrl="/" />
+              </li>
+            </SignedIn>
+            <SignedOut>
+              <li>
+                <SignInButton mode="modal" redirectUrl="/WorkOrderList">
+                  <Link href="/">Mechanic Login</Link>
+                </SignInButton>
+              </li>
+            </SignedOut>
+            {/* <li>
               <Link href="/WorkOrderList">Mechanic Login</Link>
             </li>
             <li>
               <UserButton afterSignOutUrl="/" />
-            </li>
+            </li> */}
           </ul>
         </nav>
       </div>
@@ -121,6 +135,12 @@ export default function Header() {
         ref={openMenuRef}
       >
         <ul>
+          <SignedIn>
+            <li>
+              <UserButton afterSignOutUrl="/" />
+            </li>
+            <div className={styles.lines}></div>
+          </SignedIn>
           <li>
             <Link href="/" onClick={toggleMenu}>
               Home
@@ -139,11 +159,18 @@ export default function Header() {
             </Link>
           </li>
           <div className={styles.lines}></div>
-          <li>
-            <Link href="/WorkOrderList" onClick={toggleMenu}>
-              Mechanic Login
-            </Link>
-          </li>
+          <SignedOut>
+            <li>
+              <SignInButton mode="modal" redirectUrl="/WorkOrderList">
+                <Link href="/">Mechanic Login</Link>
+              </SignInButton>
+            </li>
+          </SignedOut>
+          <SignedIn>
+            <li>
+              <Link href="/WorkOrderList">Work Orders</Link>
+            </li>
+          </SignedIn>
           <div className={styles.lines}></div>
         </ul>
       </nav>
