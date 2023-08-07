@@ -1,16 +1,3 @@
-// import { useRouter } from "next/router";
-
-// export default function SubmittedWorkOrder() {
-//   const router = useRouter();
-//   const { workOrderNumber } = router.query;
-
-//   return (
-//     <div>
-//       <h1>Work Order {workOrderNumber}</h1>
-
-//     </div>
-//   );
-// }
 import prisma from "../../../lib/prisma.js";
 
 export default async function workOrderHandler(req, res) {

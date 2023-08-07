@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styles from "../styles/submitions.module.css";
 import Link from "next/link";
+import { useUser, RedirectToSignIn } from "@clerk/nextjs";
 
 export default function Submitions() {
+  const { isLoaded, isSignedIn, user } = useUser();
+  if (!isLoaded || !isSignedIn) {
+    <RedirectToSignIn />;
+  }
+
+  const userId = user && user.id;
   //---------------------------------------list of wo---------------------------------
 
   // useState is a React hook that lets you add state to functional components.
@@ -12,8 +19,9 @@ export default function Submitions() {
   // useEffect is a React hook that allows you to perform side effects in function components. Side effects could be data fetching, subscriptions or manually changing the DOM, etc.
   // Here, it is used to fetch data from the server when the component mounts (i.e., when it is first rendered).
   useEffect(() => {
+    if (!userId) return; // Don't fetch if userId is not available
     // Fetching the data from the server-side route "/api/dk-services".
-    fetch("/api/dk-services")
+    fetch(`/api/dk-services?userId=${userId}`)
       .then((response) => {
         // If the server response is not OK (status code not in the range 200-299), an error is thrown.
         if (!response.ok) {
@@ -28,7 +36,7 @@ export default function Submitions() {
       // If there is an error (either in fetching or in converting the response to JSON), it is caught here and logged to the console.
       .catch((error) => console.error("Error:", error));
     // The second argument to useEffect is an empty array, which means the effect runs only once after the first render.
-  }, []);
+  }, [userId]);
 
   //----------------------------------handle search request-----------------------------
 
@@ -41,7 +49,7 @@ export default function Submitions() {
   function handleSearch() {
     // Make a fetch request to the server's search API endpoint.
     // The `searchTerm` is included as a query parameter in the URL.
-    fetch(`/api/dk-services?search=${searchTerm}`)
+    fetch(`/api/dk-services?search=${searchTerm}&userId=${userId}`)
       .then((response) => {
         // Check if the server's response is okay.
         // If it's not okay (e.g. the server responded with an error status), throw an error.
@@ -96,30 +104,38 @@ export default function Submitions() {
         {/* Here, the state variable `workOrders` (which is an array of work order objects) is mapped over.
             For each work order, a list item element is created, displaying the work order number and the unit number.
             The `key` prop is used by React for optimization purposes when rendering lists. */}
-        {workOrders.map((workOrder) => {
-          const dateObject = new Date(workOrder.jobDate); // Convert string to date object
-          const formattedDate = dateObject.toDateString();
+        {workOrders.length === 0 ? (
+          // This is the div that will be displayed when there are no work orders
+          <div className={styles.empty}>
+            No workorders submitted yet! You can get started by clicking the New
+            Workorder button.
+          </div>
+        ) : (
+          workOrders.map((workOrder) => {
+            const dateObject = new Date(workOrder.jobDate); // Convert string to date object
+            const formattedDate = dateObject.toDateString();
 
-          return (
-            <Link
-              href={`/work-orders/${workOrder.workOrderNumber}`}
-              key={workOrder.id}
-              className={styles.link}
-            >
-              <li key={workOrder.id} className={styles.listItem}>
-                <div className={styles.workOrderInfo}>
-                  <h4 className={styles.workOrderNumber}>
-                    {workOrder.workOrderNumber}
-                  </h4>
-                  <h5 className={styles.unitNumber}>
-                    Unit {workOrder.unitNumber}
-                  </h5>
-                </div>
-                <h4 className={styles.date}>{formattedDate}</h4>
-              </li>
-            </Link>
-          );
-        })}
+            return (
+              <Link
+                href={`/work-orders/${workOrder.workOrderNumber}`}
+                key={workOrder.id}
+                className={styles.link}
+              >
+                <li key={workOrder.id} className={styles.listItem}>
+                  <div className={styles.workOrderInfo}>
+                    <h4 className={styles.workOrderNumber}>
+                      {workOrder.workOrderNumber}
+                    </h4>
+                    <h5 className={styles.unitNumber}>
+                      Unit {workOrder.unitNumber}
+                    </h5>
+                  </div>
+                  <h4 className={styles.date}>{formattedDate}</h4>
+                </li>
+              </Link>
+            );
+          })
+        )}
       </ul>
     </>
   );

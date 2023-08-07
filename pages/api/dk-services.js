@@ -12,6 +12,7 @@ export default async function assetHandler(req, res) {
       // This block of code will execute if the HTTP method is GET.
       try {
         const searchQuery = req.query.search || "";
+        const userIdQuery = req.query.userId;
         const parsedQueryNumber = parseInt(searchQuery);
         const parsedQueryDate = new Date(searchQuery);
 
@@ -25,6 +26,7 @@ export default async function assetHandler(req, res) {
 
         const workOrders = await prisma.WorkOrder.findMany({
           where: {
+            userId: userIdQuery,
             OR: [
               { workOrderNumber: validNumberQuery },
               { jobDate: validDateQuery },
@@ -69,6 +71,7 @@ export default async function assetHandler(req, res) {
           descriptions,
           parts,
           totalHours,
+          userId,
         } = req.body;
 
         // Here, we're mapping over the descriptions, parsing the time property from a string to a float, and creating a new array of descriptions.
@@ -118,6 +121,7 @@ export default async function assetHandler(req, res) {
               create: parts,
             },
             totalHours: parsedTotalHours,
+            userId,
           },
         });
 

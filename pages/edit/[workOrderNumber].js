@@ -3,8 +3,13 @@ import styles from "../../styles/workOrderForm.module.css"; //------------------
 import Shortcuts from "../../components/shortcuts";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { useUser, RedirectToSignIn } from "@clerk/nextjs";
 
 export default function EditWorkOrder({ workOrderData }) {
+  const { isLoaded, isSignedIn, user } = useUser();
+
+  const userId = user && user.id;
+
   const initialFormState = {
     workOrderNumber: parseInt(workOrderData.workOrderNumber),
     jobDate: new Date(workOrderData.jobDate).toISOString().split("T")[0],
@@ -18,6 +23,7 @@ export default function EditWorkOrder({ workOrderData }) {
     totalHours: workOrderData.totalHours,
     descriptions: workOrderData.descriptions,
     parts: workOrderData.parts,
+    userId,
   };
 
   const [formState, setFormState] = useState(initialFormState);
@@ -27,6 +33,9 @@ export default function EditWorkOrder({ workOrderData }) {
       [e.target.name]: e.target.value,
     });
   };
+  if (!isLoaded || !isSignedIn) {
+    <RedirectToSignIn />;
+  }
   //------------------------------------submit logic--------------------------------
   const router = useRouter();
   const handleSubmit = (event) => {

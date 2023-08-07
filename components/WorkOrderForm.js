@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "../styles/workOrderForm.module.css";
+import { useUser, RedirectToSignIn } from "@clerk/nextjs";
 
 //--------------------------------------growing text area component----------------------------------------------------------
 function GrowingTextarea({ value, onChange, ...props }) {
@@ -95,11 +96,17 @@ function PartsInput({
     </div>
   );
 }
-//-------------------------------form state----------------================================
 
 export default function WorkOrderForm() {
+  //--------------------------------get user id--------------------------------------------------------
+  const { isLoaded, isSignedIn, user } = useUser();
+
+  const userId = user && user.id;
+
+  //------------------------------form state----------------================================
   //  The initial state is an object with keys for each input in the form,
   // and empty string values for each key. The jobDate key is initialized with the current date
+
   const [form, setForm] = useState({
     workOrderNumber: "",
     jobDate: new Date().toISOString().split("T")[0], //gets the current date in ISO 8601 format then split the date by "date and then time" and get the first element ("date")
@@ -114,6 +121,7 @@ export default function WorkOrderForm() {
     descriptions: [{ description: "", time: "" }],
     parts: [{ quantity: "1", part: "" }],
     totalHours: "",
+    userId: userId,
   });
   //{ ...form }: This is using the spread syntax (...) to create a new object that has all the same properties as our current form state object.
   //never directly modify our state. Instead, we create a new object with the changes we want, and then set that as the new state.
@@ -122,6 +130,9 @@ export default function WorkOrderForm() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  if (!isLoaded || !isSignedIn) {
+    return <RedirectToSignIn />;
+  }
   // ------------------------------------------submission logic--------------------------------------------
   const handleSubmit = (event) => {
     // The fetch() function is used to send a network request. Here it's sending a POST request to "/api/dk-services".

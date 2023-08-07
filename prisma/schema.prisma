@@ -8,21 +8,15 @@ datasource db {
   relationMode = "prisma"
 }
 
-model UserRoles {
-  googleUserId String @id
-  role         Role   @default(demo)
-
-  @@map("user_roles")
-}
-
-enum Role {
-  admin
-  demo
+model User {
+  id         String       @id  // unique ID provided by Clerk.
+  workOrders WorkOrder[]  // Reverse relation to fetch all work orders for a user
 }
 
 
 model WorkOrder {
   id              Int           @id @default(autoincrement())
+  userId          String
   workOrderNumber Int           @unique
   jobDate         DateTime
   client          String
@@ -36,6 +30,7 @@ model WorkOrder {
   totalHours      Float
   descriptions    Description[]
   parts           Part[]
+  user            User          @relation(fields: [userId], references: [id])  // Relation to User model
 }
 
 model Description {
