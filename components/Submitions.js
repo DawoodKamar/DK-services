@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "../styles/submitions.module.css";
 import Link from "next/link";
 import { useUser, RedirectToSignIn } from "@clerk/nextjs";
+import UserCount from "./UserCount";
 
 export default function Submitions() {
   const { isLoaded, isSignedIn, user } = useUser();
@@ -85,6 +86,7 @@ export default function Submitions() {
   //--------------------------------html--------------------------------------
   return (
     <>
+      <UserCount userId={userId} />
       <div className={styles.searchContainer}>
         <input
           className={styles.searchTerm}

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "../styles/footer.module.css";
-import { UserButton, SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
+import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
 
 export default function Footer() {
   return (

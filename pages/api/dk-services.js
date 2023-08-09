@@ -102,28 +102,39 @@ export default async function assetHandler(req, res) {
         }
 
         // If the work order doesn't already exist, create a new work order in the database with the data from the request.
-        const newWorkOrder = await prisma.workOrder.create({
-          data: {
-            workOrderNumber: parsedWorkOrderNumber,
-            jobDate: parsedJobDate,
-            client,
-            address,
-            streetAddress,
-            city,
-            unitNumber,
-            vin,
-            licensePlate,
-            hubometer,
-            descriptions: {
-              create: parsedDescriptions,
+        const newWorkOrder = await prisma.$transaction([
+          prisma.workOrder.create({
+            data: {
+              workOrderNumber: parsedWorkOrderNumber,
+              jobDate: parsedJobDate,
+              client,
+              address,
+              streetAddress,
+              city,
+              unitNumber,
+              vin,
+              licensePlate,
+              hubometer,
+              descriptions: {
+                create: parsedDescriptions,
+              },
+              parts: {
+                create: parts,
+              },
+              totalHours: parsedTotalHours,
+              userId,
             },
-            parts: {
-              create: parts,
+          }),
+          // Increment user's submission count
+          prisma.user.update({
+            where: { id: userId },
+            data: {
+              submissionCount: {
+                increment: 1,
+              },
             },
-            totalHours: parsedTotalHours,
-            userId,
-          },
-        });
+          }),
+        ]);
 
         // Respond with status code 201, which means "Created", and send the newly created work order back in the response.
         res.status(201).json(newWorkOrder);
