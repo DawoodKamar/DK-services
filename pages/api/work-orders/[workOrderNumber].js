@@ -29,11 +29,34 @@ export default async function workOrderHandler(req, res) {
 
     case "DELETE":
       try {
-        const deletedWorkOrder = await prisma.WorkOrder.delete({
+        // Check if the work order exists first before deleting.
+        const workOrderToDelete = await prisma.WorkOrder.findUnique({
           where: { workOrderNumber: parseInt(workOrderNumber) },
         });
 
-        res.status(200).json(deletedWorkOrder);
+        if (!workOrderToDelete) {
+          res.status(404).json({ error: "Work order not found." });
+          return;
+        }
+
+        const userIdForDeletedWorkOrder = workOrderToDelete.userId;
+
+        // Use transaction to delete work order and decrement submission count.
+        await prisma.$transaction([
+          prisma.WorkOrder.delete({
+            where: { workOrderNumber: parseInt(workOrderNumber) },
+          }),
+          prisma.user.update({
+            where: { id: userIdForDeletedWorkOrder },
+            data: {
+              submissionCount: {
+                decrement: 1,
+              },
+            },
+          }),
+        ]);
+
+        res.status(200).json({ message: "Work order deleted successfully." });
       } catch (e) {
         console.error("Request error", e);
         res.status(500).json({ error: "Error deleting work order" });

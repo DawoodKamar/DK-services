@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "../styles/workOrderForm.module.css";
 import { useUser, RedirectToSignIn } from "@clerk/nextjs";
+import { useRouter } from "next/router";
 
 //--------------------------------------growing text area component----------------------------------------------------------
 function GrowingTextarea({ value, onChange, ...props }) {
@@ -134,6 +135,7 @@ export default function WorkOrderForm() {
     return <RedirectToSignIn />;
   }
   // ------------------------------------------submission logic--------------------------------------------
+  const router = useRouter();
   const handleSubmit = (event) => {
     event.preventDefault();
     // The fetch() function is used to send a network request. Here it's sending a POST request to "/api/dk-services".
@@ -151,8 +153,7 @@ export default function WorkOrderForm() {
         return response.json();
       })
       .then(() => {
-        // After the JSON data has been received and processed, we reset the form to its initial state.
-        setForm(initialForm);
+        router.push("/WorkOrderList");
       })
       // If there were any errors in the above steps, they will be caught and logged here.
       .catch((error) => console.error("Error:", error));

@@ -100,6 +100,15 @@ export default async function assetHandler(req, res) {
             .json({ error: "Work order with this number already exists" });
           return;
         }
+        // Check if user exists
+        let user = await prisma.user.findUnique({ where: { id: userId } });
+
+        // If the user doesn't exist, create them
+        if (!user) {
+          user = await prisma.user.create({
+            data: { id: userId, submissionCount: 0 }, // Adding other required fields if necessary
+          });
+        }
 
         // If the work order doesn't already exist, create a new work order in the database with the data from the request.
         const newWorkOrder = await prisma.$transaction([
