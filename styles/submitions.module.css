@@ -34,7 +34,7 @@ float: right;
 
 
 .empty{
-  margin: auto;
+  margin-inline: auto;
   font-size: 1.5rem;  
 }
 

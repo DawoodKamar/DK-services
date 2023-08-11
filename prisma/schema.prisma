@@ -9,9 +9,10 @@ datasource db {
 }
 
 model User {
-  id         String       @id  // unique ID provided by Clerk.
-  submissionCount Int          @default(0)
-  workOrders WorkOrder[]  // Reverse relation to fetch all work orders for a user
+  id                String      @id  // unique ID provided by Clerk.
+  submissionCount   Int         @default(0)
+  submissionLimit   Int         @default(10)
+  workOrders        WorkOrder[]      // Reverse relation to fetch all work orders for a user
 }
 
 

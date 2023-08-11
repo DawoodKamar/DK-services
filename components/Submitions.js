@@ -109,8 +109,8 @@ export default function Submitions() {
         {workOrders.length === 0 ? (
           // This is the div that will be displayed when there are no work orders
           <div className={styles.empty}>
-            No workorders submitted yet! You can get started by clicking the New
-            Workorder button.
+            No work orders submitted yet! You can get started by clicking the
+            New Workorder button.
           </div>
         ) : (
           workOrders.map((workOrder) => {

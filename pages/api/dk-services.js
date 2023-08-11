@@ -74,6 +74,22 @@ export default async function assetHandler(req, res) {
           userId,
         } = req.body;
 
+        // Check if user exists
+        let user = await prisma.user.findUnique({ where: { id: userId } });
+
+        // If the user doesn't exist, create them
+        if (!user) {
+          user = await prisma.user.create({
+            data: { id: userId, submissionCount: 0, submissionLimit: 10 }, // Adding other required fields if necessary
+          });
+        }
+
+        // If the user reached the submission limit, return
+        if (user.submissionCount >= user.submissionLimit) {
+          res.status(403).json({ error: "Submission limit reached" });
+          return;
+        }
+
         // Here, we're mapping over the descriptions, parsing the time property from a string to a float, and creating a new array of descriptions.
         const parsedDescriptions = descriptions.map((desc) => {
           let time = parseFloat(desc.time);
@@ -99,15 +115,6 @@ export default async function assetHandler(req, res) {
             .status(409)
             .json({ error: "Work order with this number already exists" });
           return;
-        }
-        // Check if user exists
-        let user = await prisma.user.findUnique({ where: { id: userId } });
-
-        // If the user doesn't exist, create them
-        if (!user) {
-          user = await prisma.user.create({
-            data: { id: userId, submissionCount: 0 }, // Adding other required fields if necessary
-          });
         }
 
         // If the work order doesn't already exist, create a new work order in the database with the data from the request.

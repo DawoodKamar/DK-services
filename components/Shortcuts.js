@@ -27,13 +27,13 @@ export default function Shortcuts({ workOrderNumber, displayMode }) {
     return (
       <div className={styles.shortcuts}>
         <Link href="/WorkOrder">
-          <button className={styles.buttons}>New Workorder</button>
+          <button className={styles.buttons}>New Work order</button>
         </Link>
         <Link href="/WorkOrderList">
           <button className={styles.buttons}>Submissions</button>
         </Link>
         <Link href={`/edit/${workOrderNumber}`}>
-          <button className={styles.buttons}>Edit Workorder</button>
+          <button className={styles.buttons}>Edit Work order</button>
         </Link>
         <Link href={"#"}>
           <button
