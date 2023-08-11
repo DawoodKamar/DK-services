@@ -119,7 +119,7 @@ export default function Submitions() {
 
             return (
               <Link
-                href={`/work-orders/${workOrder.workOrderNumber}`}
+                href={`/work-orders/${workOrder.id}`}
                 key={workOrder.id}
                 className={styles.link}
               >

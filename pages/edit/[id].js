@@ -11,6 +11,7 @@ export default function EditWorkOrder({ workOrderData }) {
   const userId = user && user.id;
 
   const initialFormState = {
+    id: parseInt(workOrderData.id),
     workOrderNumber: parseInt(workOrderData.workOrderNumber),
     jobDate: new Date(workOrderData.jobDate).toISOString().split("T")[0],
     client: workOrderData.client,
@@ -60,7 +61,7 @@ export default function EditWorkOrder({ workOrderData }) {
     // Making a fetch request to the server to delete an existing work order.
     // The URL includes the work order number from the form state.
     // We're specifying that this should be a DELETE request by setting the `method` property to "DELETE".
-    fetch(`/api/work-orders/${formState.workOrderNumber}`, {
+    fetch(`/api/work-orders/${formState.id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     })
@@ -375,13 +376,11 @@ export default function EditWorkOrder({ workOrderData }) {
 }
 
 export async function getServerSideProps(context) {
-  // Get the workOrderNumber from the context
-  const { workOrderNumber } = context.params;
+  // Get the id from the context
+  const { id } = context.params;
 
-  // Fetch the data from the server-side route "/api/work-orders/[workOrderNumber]"
-  const res = await fetch(
-    `http://localhost:3000/api/work-orders/${workOrderNumber}`
-  );
+  // Fetch the data from the server-side route "/api/work-orders/[id]"
+  const res = await fetch(`http://localhost:3000/api/work-orders/${id}`);
 
   // Verify that the server response contains data before attempting to parse it
   if (!res.ok) {

@@ -2,14 +2,14 @@ import Link from "next/link";
 import styles from "../styles/shortcuts.module.css";
 import { useRouter } from "next/router";
 
-export default function Shortcuts({ workOrderNumber, displayMode }) {
+export default function Shortcuts({ id, displayMode }) {
   const router = useRouter();
   if (displayMode === "Edit") {
     const handleDelete = () => {
       // Making a fetch request to the server to delete an existing work order.
       // The URL includes the work order number from the form state.
       // We're specifying that this should be a DELETE request by setting the `method` property to "DELETE".
-      fetch(`/api/work-orders/${workOrderNumber}`, {
+      fetch(`/api/work-orders/${id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       })
@@ -32,7 +32,7 @@ export default function Shortcuts({ workOrderNumber, displayMode }) {
         <Link href="/WorkOrderList">
           <button className={styles.buttons}>Submissions</button>
         </Link>
-        <Link href={`/edit/${workOrderNumber}`}>
+        <Link href={`/edit/${id}`}>
           <button className={styles.buttons}>Edit Work order</button>
         </Link>
         <Link href={"#"}>

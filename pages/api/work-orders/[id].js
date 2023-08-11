@@ -2,13 +2,13 @@ import prisma from "../../../lib/prisma.js";
 
 export default async function workOrderHandler(req, res) {
   const { method } = req;
-  const { workOrderNumber } = req.query;
+  const { id } = req.query;
 
   switch (method) {
     case "GET":
       try {
         const workOrder = await prisma.WorkOrder.findUnique({
-          where: { workOrderNumber: parseInt(workOrderNumber) },
+          where: { id: parseInt(id) },
           include: {
             descriptions: true, // This includes the descriptions in the response
             parts: true, // This includes the parts in the response
@@ -31,7 +31,7 @@ export default async function workOrderHandler(req, res) {
       try {
         // Check if the work order exists first before deleting.
         const workOrderToDelete = await prisma.WorkOrder.findUnique({
-          where: { workOrderNumber: parseInt(workOrderNumber) },
+          where: { id: parseInt(id) },
         });
 
         if (!workOrderToDelete) {
@@ -44,7 +44,7 @@ export default async function workOrderHandler(req, res) {
         // Use transaction to delete work order and decrement submission count.
         await prisma.$transaction([
           prisma.WorkOrder.delete({
-            where: { workOrderNumber: parseInt(workOrderNumber) },
+            where: { id: parseInt(id) },
           }),
           prisma.user.update({
             where: { id: userIdForDeletedWorkOrder },

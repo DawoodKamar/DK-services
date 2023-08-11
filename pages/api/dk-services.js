@@ -73,9 +73,18 @@ export default async function assetHandler(req, res) {
           totalHours,
           userId,
         } = req.body;
-
+        console.log(userId);
         // Check if user exists
-        let user = await prisma.user.findUnique({ where: { id: userId } });
+        let user;
+        try {
+          user = await prisma.user.findUnique({ where: { id: userId } });
+          // Rest of user-related logic
+        } catch (e) {
+          console.error("Error fetching/creating user:", e.message);
+          return res
+            .status(500)
+            .json({ error: "Error fetching/creating user." });
+        }
 
         // If the user doesn't exist, create them
         if (!user) {
@@ -105,17 +114,17 @@ export default async function assetHandler(req, res) {
         const parsedTotalHours = parseFloat(totalHours);
 
         // Check if the work order with this number already exists in the database.
-        const existingWorkOrder = await prisma.workOrder.findUnique({
-          where: { workOrderNumber: parsedWorkOrderNumber },
-        });
+        // const existingWorkOrder = await prisma.workOrder.findUnique({
+        //   where: { workOrderNumber: parsedWorkOrderNumber },
+        // });
 
-        // If the work order already exists, return an error with status code 409, which represents a conflict.
-        if (existingWorkOrder) {
-          res
-            .status(409)
-            .json({ error: "Work order with this number already exists" });
-          return;
-        }
+        // // If the work order already exists, return an error with status code 409, which represents a conflict.
+        // if (existingWorkOrder) {
+        //   res
+        //     .status(409)
+        //     .json({ error: "Work order with this number already exists" });
+        //   return;
+        // }
 
         // If the work order doesn't already exist, create a new work order in the database with the data from the request.
         const newWorkOrder = await prisma.$transaction([
