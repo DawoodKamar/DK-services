@@ -1,8 +1,9 @@
-.searchContainer{
+.searchContainer {
   width: 100dvw;
   max-width: 1000px;
   margin: 0 auto;
   padding: 0 10px 10px 10px;
+
 
 }
 .searchTerm{
@@ -14,7 +15,7 @@
   margin-bottom: 10px;
 }
 
-.search, .clearSearch{
+.search, .clearSearch, .pageButtons{
   padding: 0.4rem 1rem;
   background: var(--_nav-links-color);
   font-size: 1rem;
@@ -28,10 +29,17 @@
 float: right;
 }
 
-.search:hover, .clearSearch:hover{
+.search:hover, .clearSearch:hover, .pageButtons:hover{
   box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 9px 25px 0 rgba(0,0,0,0.19);
 }
+.page{
+  padding-inline: 20px;
+}
 
+.pagination{
+  margin: 0 auto;
+  padding: 20px;
+}
 
 .empty{
   margin-inline: auto;
@@ -46,7 +54,7 @@ float: right;
     list-style-type: none;
     padding: 0 5px 0 5px;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     
 }
 

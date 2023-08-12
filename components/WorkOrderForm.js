@@ -101,7 +101,6 @@ function PartsInput({
 export default function WorkOrderForm() {
   //--------------------------------get user id--------------------------------------------------------
   const { isLoaded, isSignedIn, user } = useUser();
-
   const userId = user && user.id;
 
   //------------------------------form state----------------================================

@@ -6,38 +6,41 @@ import UserCount from "./UserCount";
 
 export default function Submitions() {
   const { isLoaded, isSignedIn, user } = useUser();
-  if (!isLoaded || !isSignedIn) {
-    <RedirectToSignIn />;
+  const userId = user && user.id;
+  const ITEMS_PER_PAGE = 10;
+  //----------------------------------------paginations--------------------------------
+  // Pagination State
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  // Data fetching function that considers pagination
+  function fetchData(page = 1) {
+    const endpoint = page
+      ? `/api/dk-services?userId=${userId}&page=${page}&limit=${ITEMS_PER_PAGE}`
+      : `/api/dk-services?userId=${userId}`;
+
+    fetch(endpoint)
+      .then((response) => {
+        if (!response.ok) throw new Error("Network response was not ok");
+        return response.json();
+      })
+      .then((data) => {
+        setWorkOrders(data.results); // Assuming your backend returns an object with a "results" key
+        setTotalPages(data.totalPages); // And also a "totalPages" key to inform how many pages there are in total
+      })
+      .catch((error) => console.error("Error:", error));
   }
 
-  const userId = user && user.id;
+  useEffect(() => {
+    if (!userId) return;
+    fetchData(currentPage);
+  }, [userId, currentPage]);
+
   //---------------------------------------list of wo---------------------------------
 
   // useState is a React hook that lets you add state to functional components.
   // Here, it is used to declare a state variable `workOrders` and a function `setWorkOrders` to update it. Initially, workOrders is an empty array.
   const [workOrders, setWorkOrders] = useState([]);
-
-  // useEffect is a React hook that allows you to perform side effects in function components. Side effects could be data fetching, subscriptions or manually changing the DOM, etc.
-  // Here, it is used to fetch data from the server when the component mounts (i.e., when it is first rendered).
-  useEffect(() => {
-    if (!userId) return; // Don't fetch if userId is not available
-    // Fetching the data from the server-side route "/api/dk-services".
-    fetch(`/api/dk-services?userId=${userId}`)
-      .then((response) => {
-        // If the server response is not OK (status code not in the range 200-299), an error is thrown.
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        // If the server response is OK, it is converted to JSON.
-        // This is an asynchronous operation because the full response may not have been received yet.
-        return response.json();
-      })
-      // The JSON data received from the server is then used to update the state variable `workOrders`.
-      .then((data) => setWorkOrders(data))
-      // If there is an error (either in fetching or in converting the response to JSON), it is caught here and logged to the console.
-      .catch((error) => console.error("Error:", error));
-    // The second argument to useEffect is an empty array, which means the effect runs only once after the first render.
-  }, [userId]);
 
   //----------------------------------handle search request-----------------------------
 
@@ -72,7 +75,7 @@ export default function Submitions() {
   // Use the `useEffect` hook to call `handleSearch` whenever the `searchTerm` changes.
   // This means that a new search will be performed whenever the user types something new.
   useEffect(() => {
-    handleSearch();
+    if (searchTerm) handleSearch();
   }, [searchTerm]);
 
   // Declare a function `clearSearch` that will be used to clear the search term.
@@ -82,6 +85,17 @@ export default function Submitions() {
   const clearSearch = () => {
     setSearchTerm("");
   };
+  // Pagination controls
+  const handlePrevPage = () => {
+    if (currentPage > 1) setCurrentPage((prev) => prev - 1);
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
+  };
+  if (!isLoaded || !isSignedIn) {
+    return <RedirectToSignIn />;
+  }
 
   //--------------------------------html--------------------------------------
   return (
@@ -120,8 +134,8 @@ export default function Submitions() {
             return (
               <Link
                 href={`/work-orders/${workOrder.id}`}
-                key={workOrder.id}
                 className={styles.link}
+                key={workOrder.id}
               >
                 <li key={workOrder.id} className={styles.listItem}>
                   <div className={styles.workOrderInfo}>
@@ -139,6 +153,25 @@ export default function Submitions() {
           })
         )}
       </ul>
+      <div className={styles.pagination}>
+        <button
+          className={styles.pageButtons}
+          onClick={handlePrevPage}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <span className={styles.page}>
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          className={styles.pageButtons}
+          onClick={handleNextPage}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
+      </div>
     </>
   );
 }

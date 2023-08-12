@@ -1,9 +1,16 @@
 import Link from "next/link";
 import styles from "../styles/shortcuts.module.css";
 import { useRouter } from "next/router";
+import React, { useContext } from "react";
+import { UserContext } from "../components/UserProvider";
 
 export default function Shortcuts({ id, displayMode }) {
+  console.log("Shortcuts component rendered");
   const router = useRouter();
+
+  const { hasReachedLimit, refreshUserData } = useContext(UserContext);
+  refreshUserData();
+
   if (displayMode === "Edit") {
     const handleDelete = () => {
       // Making a fetch request to the server to delete an existing work order.
@@ -24,10 +31,13 @@ export default function Shortcuts({ id, displayMode }) {
         })
         .catch((error) => console.error("Error:", error));
     };
+    console.log(hasReachedLimit);
     return (
       <div className={styles.shortcuts}>
         <Link href="/WorkOrder">
-          <button className={styles.buttons}>New Work order</button>
+          <button className={styles.buttons} disabled={hasReachedLimit}>
+            New Work order
+          </button>
         </Link>
         <Link href="/WorkOrderList">
           <button className={styles.buttons}>Submissions</button>
@@ -45,15 +55,17 @@ export default function Shortcuts({ id, displayMode }) {
         </Link>
       </div>
     );
-  } else
-    return (
-      <div className={styles.shortcuts}>
-        <Link href="/WorkOrder">
-          <button className={styles.buttons}>New Workorder</button>
-        </Link>
-        <Link href="/WorkOrderList">
-          <button className={styles.buttons}>Submissions</button>
-        </Link>
-      </div>
-    );
+  } else console.log(hasReachedLimit);
+  return (
+    <div className={styles.shortcuts}>
+      <Link href="/WorkOrder">
+        <button className={styles.buttons} disabled={hasReachedLimit}>
+          New Workorder
+        </button>
+      </Link>
+      <Link href="/WorkOrderList">
+        <button className={styles.buttons}>Submissions</button>
+      </Link>
+    </div>
+  );
 }

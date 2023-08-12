@@ -15,6 +15,8 @@ export default async function assetHandler(req, res) {
         const userIdQuery = req.query.userId;
         const parsedQueryNumber = parseInt(searchQuery);
         const parsedQueryDate = new Date(searchQuery);
+        const page = parseInt(req.query.page, 10) || 1;
+        const limit = parseInt(req.query.limit, 10) || 10;
 
         // Check if the parsed values are valid numbers or dates
         const validNumberQuery = !isNaN(parsedQueryNumber)
@@ -41,10 +43,41 @@ export default async function assetHandler(req, res) {
               { totalHours: validNumberQuery },
             ],
           },
+          orderBy: {
+            workOrderNumber: "desc",
+          },
+          take: limit,
+          skip: (page - 1) * limit,
+        });
+        const totalCount = await prisma.WorkOrder.count({
+          where: {
+            userId: userIdQuery,
+            OR: [
+              { workOrderNumber: validNumberQuery },
+              { jobDate: validDateQuery },
+              { client: { contains: searchQuery } },
+              { address: { contains: searchQuery } },
+              { streetAddress: { contains: searchQuery } },
+              { city: { contains: searchQuery } },
+              { unitNumber: { contains: searchQuery } },
+              { vin: { contains: searchQuery } },
+              { licensePlate: { contains: searchQuery } },
+              { hubometer: { contains: searchQuery } },
+              { totalHours: validNumberQuery },
+            ],
+          },
+        });
+        const totalPages = Math.ceil(totalCount / limit);
+
+        res.status(200).json({
+          results: workOrders,
+          currentPage: page,
+          totalPages: totalPages,
+          totalItems: totalCount,
         });
 
         // Sends the fetched work orders back in the response with a status code of 200, which means "OK".
-        res.status(200).json(workOrders);
+        // res.status(200).json(workOrders);
       } catch (e) {
         // If there was an error in the above code, it gets caught here and is logged to the console.
         // A status code of 500, which means "Internal Server Error", is sent back in the response, along with an error message.
@@ -113,20 +146,6 @@ export default async function assetHandler(req, res) {
         const parsedJobDate = new Date(jobDate);
         const parsedTotalHours = parseFloat(totalHours);
 
-        // Check if the work order with this number already exists in the database.
-        // const existingWorkOrder = await prisma.workOrder.findUnique({
-        //   where: { workOrderNumber: parsedWorkOrderNumber },
-        // });
-
-        // // If the work order already exists, return an error with status code 409, which represents a conflict.
-        // if (existingWorkOrder) {
-        //   res
-        //     .status(409)
-        //     .json({ error: "Work order with this number already exists" });
-        //   return;
-        // }
-
-        // If the work order doesn't already exist, create a new work order in the database with the data from the request.
         const newWorkOrder = await prisma.$transaction([
           prisma.workOrder.create({
             data: {
