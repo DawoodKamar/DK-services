@@ -9,16 +9,12 @@ export default async function assetHandler(req, res) {
   // A switch statement to handle different request methods.
   switch (method) {
     case "GET":
-      // This block of code will execute if the HTTP method is GET.
       try {
         const searchQuery = req.query.search || "";
         const userIdQuery = req.query.userId;
         const parsedQueryNumber = parseInt(searchQuery);
         const parsedQueryDate = new Date(searchQuery);
-        const page = parseInt(req.query.page, 10) || 1;
-        const limit = parseInt(req.query.limit, 10) || 10;
 
-        // Check if the parsed values are valid numbers or dates
         const validNumberQuery = !isNaN(parsedQueryNumber)
           ? parsedQueryNumber
           : undefined;
@@ -26,47 +22,39 @@ export default async function assetHandler(req, res) {
           ? parsedQueryDate
           : undefined;
 
+        const whereClause = {
+          userId: userIdQuery,
+          OR: [
+            { workOrderNumber: validNumberQuery },
+            { jobDate: validDateQuery },
+            { client: { contains: searchQuery } },
+            { address: { contains: searchQuery } },
+            { streetAddress: { contains: searchQuery } },
+            { city: { contains: searchQuery } },
+            { unitNumber: { contains: searchQuery } },
+            { vin: { contains: searchQuery } },
+            { licensePlate: { contains: searchQuery } },
+            { hubometer: { contains: searchQuery } },
+            { totalHours: validNumberQuery },
+          ],
+        };
+
+        const page = parseInt(req.query.page, 10) || 1;
+        const limit = parseInt(req.query.limit, 10) || 10;
+
         const workOrders = await prisma.WorkOrder.findMany({
-          where: {
-            userId: userIdQuery,
-            OR: [
-              { workOrderNumber: validNumberQuery },
-              { jobDate: validDateQuery },
-              { client: { contains: searchQuery } },
-              { address: { contains: searchQuery } },
-              { streetAddress: { contains: searchQuery } },
-              { city: { contains: searchQuery } },
-              { unitNumber: { contains: searchQuery } },
-              { vin: { contains: searchQuery } },
-              { licensePlate: { contains: searchQuery } },
-              { hubometer: { contains: searchQuery } },
-              { totalHours: validNumberQuery },
-            ],
-          },
+          where: whereClause,
           orderBy: {
             workOrderNumber: "desc",
           },
           take: limit,
           skip: (page - 1) * limit,
         });
+
         const totalCount = await prisma.WorkOrder.count({
-          where: {
-            userId: userIdQuery,
-            OR: [
-              { workOrderNumber: validNumberQuery },
-              { jobDate: validDateQuery },
-              { client: { contains: searchQuery } },
-              { address: { contains: searchQuery } },
-              { streetAddress: { contains: searchQuery } },
-              { city: { contains: searchQuery } },
-              { unitNumber: { contains: searchQuery } },
-              { vin: { contains: searchQuery } },
-              { licensePlate: { contains: searchQuery } },
-              { hubometer: { contains: searchQuery } },
-              { totalHours: validNumberQuery },
-            ],
-          },
+          where: whereClause,
         });
+
         const totalPages = Math.ceil(totalCount / limit);
 
         res.status(200).json({
@@ -75,17 +63,11 @@ export default async function assetHandler(req, res) {
           totalPages: totalPages,
           totalItems: totalCount,
         });
-
-        // Sends the fetched work orders back in the response with a status code of 200, which means "OK".
-        // res.status(200).json(workOrders);
       } catch (e) {
-        // If there was an error in the above code, it gets caught here and is logged to the console.
-        // A status code of 500, which means "Internal Server Error", is sent back in the response, along with an error message.
         console.error("Request error", e);
         res.status(500).json({ error: "Error fetching posts" });
       }
       break;
-
     case "POST":
       // This block of code will execute if the HTTP method is POST.
       try {
@@ -106,7 +88,6 @@ export default async function assetHandler(req, res) {
           totalHours,
           userId,
         } = req.body;
-        console.log(userId);
         // Check if user exists
         let user;
         try {

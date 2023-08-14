@@ -74,7 +74,7 @@ export default function Header() {
       <div className={`${styles.banner} ${isScrolled ? styles.scrolled : ""}`}>
         <Link href="/" className={styles.logo}>
           {" "}
-          DK Services
+          DK SERVICES
         </Link>
         <div
           className={`${styles.hamburgerMenu} ${showMenu ? styles.open : ""}`}

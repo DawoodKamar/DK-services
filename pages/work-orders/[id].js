@@ -4,6 +4,12 @@ import dk from "../../public/images/dkLogo.jpg";
 import styles from "../../styles/wo.module.css";
 import Shortcuts from "../../components/shortcuts";
 
+import React from "react";
+let html2pdf;
+if (typeof window !== "undefined") {
+  html2pdf = require("html2pdf.js").default;
+}
+
 export default function SubmittedWorkOrder({ workOrderData }) {
   const {
     id,
@@ -20,9 +26,35 @@ export default function SubmittedWorkOrder({ workOrderData }) {
     descriptions,
     parts,
   } = workOrderData;
+
+  const handleDownloadPDF = () => {
+    console.log("Button clicked"); // Check if function is triggered
+    console.log("Type of html2pdf:", typeof html2pdf);
+    if (typeof html2pdf === "function") {
+      console.log("html2pdf exists"); // Check if html2pdf is correctly loaded
+      const element = document.querySelector("." + styles.container);
+      if (element) {
+        console.log("Element found"); // Check if the element you want to convert exists
+      } else {
+        console.log("Element not found");
+      }
+      const opt = {
+        margin: 10,
+        filename: `WorkOrder${workOrderNumber}.pdf`,
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+      };
+      html2pdf(element, opt).save();
+    }
+  };
+
   return (
     <Layout>
       <Shortcuts id={id} displayMode="Edit" />
+      <button onClick={handleDownloadPDF} className={styles.button}>
+        Download as PDF
+      </button>
       <div className={styles.container}>
         <Image
           src={dk}

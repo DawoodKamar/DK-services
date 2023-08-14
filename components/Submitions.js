@@ -66,7 +66,7 @@ export default function Submitions() {
       .then((data) =>
         // After parsing the response data, use it to update the `workOrders` state variable.
         // This will cause the component to re-render with the new search results.
-        setWorkOrders(data)
+        setWorkOrders(data.results)
       )
       // If any error occurs during the fetch or parsing operations, log it to the console.
       .catch((error) => console.error("Error:", error));

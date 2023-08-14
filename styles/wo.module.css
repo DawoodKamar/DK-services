@@ -10,59 +10,79 @@
     /* gap: 0.2em; */
     margin: 0 auto 1em auto;
   }
+.button{
+  margin-inline: auto;
+    padding: 1rem 1rem;
+    background: var(--_nav-links-color);
+    font-size: 1rem;
+    border-radius: 10px;
+    display: inline-block;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
 
-  .workOrderInfo {
+.button:hover {
+    box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 9px 25px 0 rgba(0,0,0,0.19);
+}
+  
+.workOrderInfo {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap-reverse;
   }
-  .workOrderUnit{
+.workOrderUnit{
     order: -1;
   }
 
-  .logo {
+.logo {
     width: 600px;
     height: auto;
     margin: 0 auto;
   }
 
-  @media (max-width: 768px) { 
+/* @media print {
+  .logo {
+display: none;
+  }
+} */
+
+@media (max-width: 768px) { 
     .logo {
       width: 300px;
     }
   }
 
-  .descriptionItem{
+.descriptionItem{
     display: flex;
  
   }
-  .descriptionDetails{
+.descriptionDetails{
     max-width: 70%;
   }
-  .descriptionTime{
+.descriptionTime{
     margin-left: auto;
 
   }
 
-  .parts {
+.parts {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
   }
 
-  .parts > div {
+.parts > div {
     width: 40%;
     border-bottom: 1px solid rgb(0, 0, 0);
   }
 
   
-  .workOrderItem {
+.workOrderItem {
     display: flex;
     justify-content: space-around;
     border: 2px solid rgb(0, 0, 0);
   }
   
-  .workOrderItem > div {
+.workOrderItem > div {
     flex-grow: 1;
     display: flex;
     flex-direction: column;

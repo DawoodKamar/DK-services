@@ -37,7 +37,7 @@ model WorkOrder {
 
 model Description {
   id          Int       @id @default(autoincrement())
-  description String?
+  description String?   @db.Text
   time        Float?
   workOrderId Int
   workOrder   WorkOrder @relation(fields: [workOrderId], references: [id], onDelete: Cascade)

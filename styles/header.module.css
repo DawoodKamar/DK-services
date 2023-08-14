@@ -17,10 +17,10 @@
   }
 
   .banner {
-    max-width: 1470px;
+    /* max-width: 1470px; */
     height: 4rem;
     display: flex;
-    margin: auto;
+    margin-left: 10%;
     justify-content: space-between;
     align-items: center;
   }
@@ -145,6 +145,7 @@
         display: flex;
         padding: 0rem 2rem 0rem 2rem;
         justify-content: space-between;
+        margin: auto;
     }
 
 
