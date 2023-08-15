@@ -33,6 +33,7 @@ model WorkOrder {
   descriptions    Description[]
   parts           Part[]
   user            User          @relation(fields: [userId], references: [id])  // Relation to User model
+  isDownloaded    Boolean       @default(false)
 }
 
 model Description {

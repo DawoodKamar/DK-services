@@ -137,7 +137,12 @@ export default function Submitions() {
                 className={styles.link}
                 key={workOrder.id}
               >
-                <li key={workOrder.id} className={styles.listItem}>
+                <li
+                  key={workOrder.id}
+                  className={`${styles.listItem} ${
+                    workOrder.isDownloaded ? styles.downloaded : ""
+                  }`}
+                >
                   <div className={styles.workOrderInfo}>
                     <h4 className={styles.workOrderNumber}>
                       {workOrder.workOrderNumber}
@@ -151,27 +156,27 @@ export default function Submitions() {
               </Link>
             );
           })
-        )}
+        )}{" "}
+        <div className={styles.pagination}>
+          <button
+            className={styles.pageButtons}
+            onClick={handlePrevPage}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <span className={styles.page}>
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            className={styles.pageButtons}
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </div>
       </ul>
-      <div className={styles.pagination}>
-        <button
-          className={styles.pageButtons}
-          onClick={handlePrevPage}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </button>
-        <span className={styles.page}>
-          Page {currentPage} of {totalPages}
-        </span>
-        <button
-          className={styles.pageButtons}
-          onClick={handleNextPage}
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </button>
-      </div>
     </>
   );
 }
