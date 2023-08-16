@@ -29,7 +29,6 @@ export default async function assetHandler(req, res) {
             { jobDate: validDateQuery },
             { client: { contains: searchQuery } },
             { address: { contains: searchQuery } },
-            { streetAddress: { contains: searchQuery } },
             { city: { contains: searchQuery } },
             { unitNumber: { contains: searchQuery } },
             { vin: { contains: searchQuery } },

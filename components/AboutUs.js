@@ -22,11 +22,12 @@ export default function ContactForm() {
             {/* Text */}
             <div className={styles.text}>
               <p>
-                At DK Services, we believe in the power of being there when you
-                need us most. Our passion for mechanics was born out of a love
-                for problem-solving. Our experience, hard work, and commitment
-                have made us experts in our field, but it's our dedication to
-                you, our client, that truly drives us.
+                At DK Services, we understand the pulse of the truck and trailer
+                service industry. Born from the hands of an experienced
+                mechanic, our platform is not just another management tool—it's
+                a testament to the importance of uninterrupted workflow. We're
+                dedicated to ensuring that businesses, like yours, never miss a
+                beat and keep the wheels turning, day in and day out.
               </p>
             </div>
           </div>
@@ -45,12 +46,13 @@ export default function ContactForm() {
             {/* Text */}
             <div className={styles.text}>
               <p>
-                Every day, we help our clients keep their trailers in optimal
-                condition. We understand that you rely on these vehicles for
-                your livelihood, which is why we're committed to delivering
-                prompt and efficient service. Every mechanic in our team is a
-                seasoned professional who's been there and knows exactly what
-                your truck or trailer needs to stay in peak condition.
+                Every feature in DK Services is designed with you in mind.
+                Recognizing the unique challenges faced by mechanics and service
+                providers, our founder channeled his own experiences into
+                creating a platform that speaks your language. We prioritize
+                your needs, ensuring that each solution is not only efficient
+                but also intuitive, making your work simpler and more
+                productive.
               </p>
             </div>
           </div>
@@ -87,44 +89,16 @@ export default function ContactForm() {
           {/* Text */}
           <div className={styles.text}>
             <p>
-              We offer a wide range of services, from routine maintenance and
-              inspections to complex repairs. Whether it's a simple light change
-              or an axle overhaul, our team has the skills and equipment to
-              handle it. We prioritize quality in everything we do because we
-              know that your business deserves nothing less.
+              DK Services goes beyond basic work order management. Our platform
+              offers a holistic approach, encompassing every aspect of the truck
+              and trailer repair process. Dive into a system that's as
+              comprehensive as the expertise of the mechanic who built it.
             </p>
           </div>
         </div>
 
         {/* Second column */}
         <div className={styles.column2}>
-          {/* Heading */}
-          <div className={styles.heading}>
-            <h3>On-Site Assistance</h3>
-          </div>
-
-          {/* Divider */}
-          <div className={styles.divider}>
-            <hr />
-          </div>
-          {/* Text */}
-          <div className={styles.text}>
-            <p>
-              Our mobile service means we come to you, wherever you are in the
-              western greater Toronto area. Breakdowns don't always happen at
-              convenient times or places, but with us on your side, you never
-              have to worry. We're ready to roll out at a moment's notice,
-              bringing our expertise and equipment directly to you.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* -----------------------------------Section 3-------------------------------------------------- */}
-
-      <div className={styles.container}>
-        {/* First column */}
-        <div className={styles.column1}>
           {/* Heading */}
           <div className={styles.heading}>
             <h3>Reliability and Transparency</h3>
@@ -137,34 +111,13 @@ export default function ContactForm() {
           {/* Text */}
           <div className={styles.text}>
             <p>
-              We believe in doing business with integrity. That means clear
-              pricing and honest communication about what your vehicle needs and
-              how we can help. We'll never suggest unnecessary work, and we'll
-              always keep you informed every step of the way.
-            </p>
-          </div>
-        </div>
-
-        {/* Second column */}
-        <div className={styles.column2}>
-          {/* Heading */}
-          <div className={styles.heading}>
-            <h3>Better Business, Better Lives</h3>
-          </div>
-
-          {/* Divider */}
-          <div className={styles.divider}>
-            <hr />
-          </div>
-          {/* Text */}
-          <div className={styles.text}>
-            <p>
-              Ultimately, our goal is to make your life easier. By ensuring your
-              trucks and trailers are always in top shape, we help you avoid
-              unexpected breakdowns and costly downtime. When your vehicles are
-              running smoothly, you can focus on what you do best: running your
-              business. We take care of the mechanics so you can keep your
-              business moving forward.
+              In the demanding realm of truck and trailer services, reliability
+              isn't just a bonus—it's a necessity. At DK Services, we've built a
+              platform you can lean on, day in and day out. We value
+              transparency as much as you do, ensuring clear communication and
+              straightforward processes at every turn. With us, you're not just
+              getting a tool; you're partnering with a platform that stands by
+              its word.
             </p>
           </div>
         </div>

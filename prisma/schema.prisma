@@ -23,7 +23,6 @@ model WorkOrder {
   jobDate         DateTime
   client          String
   address         String?
-  streetAddress   String?
   city            String?
   unitNumber      String?
   vin             String?

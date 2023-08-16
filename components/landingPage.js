@@ -12,15 +12,16 @@ export default function LandingPage() {
       <section className={`${styles.hero} ${styles.wrap}`}>
         <div className={styles.heroSection}>
           <div className={styles.herohead}>
-            <h1>Your fleet is looking good. Lets get it back on the road.</h1>
+            <h1>Where Truck and Trailer Mechanics Meet Modern Management</h1>
           </div>
           <div className={styles.hook}>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet
-              atque minima error optio debitis ab
+              Crafted by a mechanic, for mechanics. Dive into a system that
+              understands your needs, prioritizes your tasks, and accelerates
+              your service delivery.
             </p>
           </div>
-          <button className={styles.cta}>Call Now</button>
+          {/* <button className={styles.cta}>Call Now</button> */}
         </div>
         <div className={styles.images}>
           <Image
@@ -39,19 +40,6 @@ export default function LandingPage() {
             height={803}
             className={styles.img2}
           />
-          {/* <div className={styles.img2}>
-
-          </div> 
-          
-          <div className={styles.img3}>
-            <Image
-              src={dry}
-              alt="dryvan"
-              placeholder="blur" 
-              fill
-            
-            /> 
-          </div> */}
         </div>
       </section>
       {/* ----------------------------------------------------------------------- */}
@@ -70,23 +58,24 @@ export default function LandingPage() {
           <div>
             <div className={styles.tag1}>
               <h2 className={styles.tag}>Experience</h2>
-              <p>Many years in the truck and trailer service industry</p>
+              <p>
+                Crafted from years in the truck and trailer service trenches.
+              </p>
             </div>
             {/* <div className={styles.line}></div> */}
             <div className={styles.tag2}>
               <h2 className={styles.tag}>Reliability</h2>
               <p>
-                Fully licenced, insured, and highly reliable mechanics you can
-                count on
+                Designed by a fully licensed mechanic who knows the value of
+                trust. <br></br>
+                <br></br>Count on a platform as reliable as the hands that built
+                it.
               </p>
             </div>
             {/* <div className={styles.line}></div> */}
             <div className={styles.tag3}>
               <h2 className={styles.tag}>Dedication</h2>
-              <p>
-                Committed to getting your fleet back on the road safely and
-                swiftly
-              </p>
+              <p>More than just an app, it's a mechanic's promise.</p>
             </div>
           </div>
         </div>

@@ -1,15 +1,20 @@
 import styles from "../styles/contact.module.css";
 
 export default function ContactForm() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Handle form submission
-  };
-
   return (
     <div className={styles.formSection}>
       <div className={styles.contactFormContainer}>
-        <form className={styles.contactForm} onSubmit={handleSubmit}>
+        <form
+          className={styles.contactForm}
+          action="https://formspree.io/f/mzblewew"
+          method="POST"
+        >
+          <input
+            type="hidden"
+            name="_subject"
+            value="New contact form submission!"
+          />
+
           <h2>Let's Talk.</h2>
           <div className={styles.formField}>
             <input type="text" name="name" placeholder="Your Name" />
@@ -40,9 +45,9 @@ export default function ContactForm() {
       <div className={styles.info}>
         <h2>Contact Info</h2>
         <h3>Call us</h3>
-        <p>(647)123-4567</p>
+        <p>(Coming Soon)</p>
         <h3>Email us</h3>
-        <p>dawood123@gmail.com</p>
+        <p>dkservices.email@gmail.com</p>
       </div>
     </div>
   );
