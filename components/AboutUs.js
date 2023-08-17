@@ -1,6 +1,6 @@
 import styles from "../styles/aboutus.module.css";
 import Image from "next/image";
-import mechanic from "../public/images/dkimage.jpg";
+import mechanic from "../images/dkimage.jpg";
 
 export default function ContactForm() {
   return (

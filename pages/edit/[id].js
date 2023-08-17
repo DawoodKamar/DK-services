@@ -1,6 +1,6 @@
-import Layout from "../../components/layout";
+import Layout from "../../components/Layout";
 import styles from "../../styles/workOrderForm.module.css"; //----------------------------------------------------------------
-import Shortcuts from "../../components/shortcuts";
+import Shortcuts from "../../components/Shortcuts";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useUser, RedirectToSignIn } from "@clerk/nextjs";

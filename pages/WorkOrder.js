@@ -1,7 +1,7 @@
 import Head from "next/head";
-import Layout from "../components/layout";
+import Layout from "../components/Layout";
 import WorkOrderForm from "../components/WorkOrderForm";
-import Shortcuts from "../components/shortcuts";
+import Shortcuts from "../components/Shortcuts";
 
 export default function WorkOrder() {
   return (

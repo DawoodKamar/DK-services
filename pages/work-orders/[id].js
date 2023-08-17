@@ -1,8 +1,8 @@
-import Layout from "../../components/layout";
+import Layout from "../../components/Layout";
 import Image from "next/image";
 import dk from "../../public/images/dkLogo.jpg";
 import styles from "../../styles/wo.module.css";
-import Shortcuts from "../../components/shortcuts";
+import Shortcuts from "../../components/Shortcuts";
 import dynamic from "next/dynamic";
 
 let html2pdf;

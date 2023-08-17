@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import ContactForm from '../components/ContactForm';
-import Layout from '../components/layout';
+import Layout from '../components/Layout';
 
 export default function Contact() {
 

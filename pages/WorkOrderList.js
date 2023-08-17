@@ -1,8 +1,8 @@
 import React from "react";
 import Head from "next/head";
 import Submitions from "../components/Submitions";
-import Layout from "../components/layout";
-import Shortcuts from "../components/shortcuts";
+import Layout from "../components/Layout";
+import Shortcuts from "../components/Shortcuts";
 
 export default function Contact() {
   return (
