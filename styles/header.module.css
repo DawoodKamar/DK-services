@@ -4,16 +4,13 @@
     z-index: 100;
     background-color: var(--_bg);
     box-shadow: 0 10px 8px 0 rgba(0,0,0,0.24);
-    /* background-color: white;
-    border-bottom: 1px solid black;
-     */
-  
-    /* ////////////////// */
+
   }
 
   .header.scrolled {
-    opacity: 0.97;
+    opacity: 0.90;
     height: 3rem;
+
   }
 
   .banner {
@@ -23,6 +20,7 @@
     margin-left: 10%;
     justify-content: space-between;
     align-items: center;
+    transition: opacity 0.3s ease, height 0.3s ease;
   }
 
   .banner.scrolled{

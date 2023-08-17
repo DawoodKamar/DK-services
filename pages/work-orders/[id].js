@@ -121,7 +121,7 @@ export async function getServerSideProps(context) {
   const { id } = context.params;
 
   // Fetch the data from the server-side route "/api/work-orders/[workOrderNumber]"
-  const res = await fetch(`https://dk-services.vercel.app/api/work-orders/${id}`);
+  const res = await fetch(`https://dk-services-3o8ojs3e5-dawoodkamar.vercel.app/api/work-orders/${id}`);
 
   // Verify that the server response contains data before attempting to parse it
   if (!res.ok) {

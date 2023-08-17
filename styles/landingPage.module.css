@@ -9,6 +9,7 @@
     flex-wrap: wrap;
     gap: 6rem;
     padding: 3rem 0 5rem 0;
+    overflow-x: hidden;
    
   }
 
