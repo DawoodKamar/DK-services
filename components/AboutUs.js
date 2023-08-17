@@ -1,6 +1,5 @@
 import styles from "../styles/aboutus.module.css";
 import Image from "next/image";
-import mechanic from "../images/dkimage.jpg";
 
 export default function ContactForm() {
   return (
@@ -63,10 +62,12 @@ export default function ContactForm() {
           {/* Image */}
           <div className={styles.image}>
             <Image
-              src={mechanic}
+              src="/images/dkimage.jpg"
               alt="dk-services mechanic"
+              width={1677}
+              height={2126}
               quality={100}
-              placeholder="blur"
+              
             />
           </div>
         </div>

@@ -1,9 +1,6 @@
 import Layout from "./Layout";
 import styles from "../styles/landingPage.module.css";
 import Image from "next/image";
-import dry from "../images/Dry-Van.png";
-import reefer from "../images/DuraPlate_HD.png";
-import working from "../images/working.jpg";
 import ContactForm from "./ContactForm";
 
 export default function LandingPage() {
@@ -25,17 +22,15 @@ export default function LandingPage() {
         </div>
         <div className={styles.images}>
           <Image
-            src={reefer}
+            src="/images/DuraPlate_HD.png"
             alt="dryvan"
-            placeholder="blur"
             width={640}
             height={390}
             className={styles.img1}
           />
           <Image
-            src={dry}
+            src="/images/Dry-Van.png"
             alt="Reefer"
-            placeholder="blur"
             width={1200}
             height={803}
             className={styles.img2}
@@ -48,7 +43,7 @@ export default function LandingPage() {
         <div className={styles.wrap}>
           <div className={styles.working}>
             <Image
-              src={working}
+              src="/images/working.jpg"
               alt="Reefer"
               width={1118}
               height={871}
