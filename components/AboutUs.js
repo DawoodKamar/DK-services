@@ -66,7 +66,6 @@ export default function ContactForm() {
               alt="dk-services mechanic"
               width={1677}
               height={2126}
-              quality={100}
               
             />
           </div>

@@ -378,9 +378,14 @@ export default function EditWorkOrder({ workOrderData }) {
 export async function getServerSideProps(context) {
   // Get the id from the context
   const { id } = context.params;
+  const { req } = context;
+
+  // Determine the base URL
+  const protocol = req.headers['x-forwarded-proto'] || 'http';
+  const baseUrl = `${protocol}://${req.headers.host}`;
 
   // Fetch the data from the server-side route "/api/work-orders/[id]"
-  const res = await fetch(`https://dk-services-3o8ojs3e5-dawoodkamar.vercel.app/api/work-orders/${id}`);
+  const res = await fetch(`${baseUrl}/api/work-orders/${id}`);
 
   // Verify that the server response contains data before attempting to parse it
   if (!res.ok) {
