@@ -1,4 +1,4 @@
-import Layout from "../../components/Layout";
+import Layout from "../../components/layout";
 import styles from "../../styles/workOrderForm.module.css"; //----------------------------------------------------------------
 import Shortcuts from "../../components/Shortcuts";
 import React, { useState, useEffect } from "react";

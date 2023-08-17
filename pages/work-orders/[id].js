@@ -1,4 +1,4 @@
-import Layout from "../../components/Layout";
+import Layout from "../../components/layout";
 import Image from "next/image";
 import dk from "../../public/images/dkLogo.jpg";
 import styles from "../../styles/wo.module.css";

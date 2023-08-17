@@ -1,4 +1,4 @@
-import Layout from "./Layout";
+import Layout from "./layout";
 import styles from "../styles/landingPage.module.css";
 import Image from "next/image";
 import ContactForm from "./ContactForm";
