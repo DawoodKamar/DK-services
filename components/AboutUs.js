@@ -62,7 +62,7 @@ export default function ContactForm() {
           {/* Image */}
           <div className={styles.image}>
             <Image
-              src="/images/dkimage.jpg"
+              src="/images/dkimage.JPG"
               alt="dk-services mechanic"
               width={1677}
               height={2126}
