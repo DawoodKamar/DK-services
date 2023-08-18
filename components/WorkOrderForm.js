@@ -176,7 +176,15 @@ export default function WorkOrderForm() {
 
   const handleTimeChange = (e, index) => {
     const newDescriptions = [...form.descriptions];
-    newDescriptions[index].time = parseFloat(e.target.value) || 0;
+    const inputValue = e.target.value;
+
+    // If the input value ends with a decimal point, keep it as a string
+    if (inputValue.endsWith(".")) {
+      newDescriptions[index].time = inputValue;
+    } else {
+      newDescriptions[index].time = parseFloat(inputValue) || "";
+    }
+
     setForm({ ...form, descriptions: newDescriptions });
     updateStateAndCalculateTotalHours(newDescriptions);
   };
