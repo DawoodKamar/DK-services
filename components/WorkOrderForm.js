@@ -53,8 +53,9 @@ function DescriptionInput({
       <label>
         Time:
         <input
-          type="number"
-          step="0.25"
+          type="text"
+          inputmode="decimal"
+          pattern="\d*(\.\d{0,2})?"
           value={time}
           name={`time${index}`}
           onChange={handleTimeChange}
@@ -315,7 +316,9 @@ export default function WorkOrderForm() {
           readOnly
         />
       </label>
-      <button type="submit">Submit</button>
+      <button type="submit" className={styles.submit}>
+        Submit
+      </button>
     </form>
   );
 }
