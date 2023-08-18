@@ -55,7 +55,6 @@ function DescriptionInput({
         <input
           type="text"
           inputmode="decimal"
-          pattern="\d*(\.\d{0,2})?"
           value={time}
           name={`time${index}`}
           onChange={handleTimeChange}
