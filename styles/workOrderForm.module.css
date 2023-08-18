@@ -24,6 +24,8 @@
 }
 
 .form button {
+    -webkit-appearance: none;
+    appearance: none;
 
     padding: 0.4rem 1rem;
     background: var(--_nav-links-color);
@@ -34,7 +36,9 @@
     transition-duration: 0.4s;
 }
 
-.form button:hover {
+.form button:hover, 
+.form button:active, 
+.form button:focus  {
     box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 9px 25px 0 rgba(0,0,0,0.19);
 }
 
