@@ -54,7 +54,7 @@ function DescriptionInput({
         Time:
         <input
           type="text"
-          inputmode="decimal"
+          inputMode="decimal"
           value={time}
           name={`time${index}`}
           onChange={handleTimeChange}
@@ -102,6 +102,8 @@ export default function WorkOrderForm() {
   //--------------------------------get user id--------------------------------------------------------
   const { isLoaded, isSignedIn, user } = useUser();
   const userId = user && user.id;
+  const localDate = new Date();
+  localDate.setMinutes(localDate.getMinutes() - localDate.getTimezoneOffset());
 
   //------------------------------form state----------------================================
   //  The initial state is an object with keys for each input in the form,
@@ -109,7 +111,7 @@ export default function WorkOrderForm() {
 
   const [form, setForm] = useState({
     workOrderNumber: "",
-    jobDate: new Date().toISOString().split("T")[0], //gets the current date in ISO 8601 format then split the date by "date and then time" and get the first element ("date")
+    jobDate: localDate.toISOString().split("T")[0], //gets the current date in ISO 8601 format then split the date by "date and then time" and get the first element ("date")
     client: "",
     address: "",
     streetAddress: "",

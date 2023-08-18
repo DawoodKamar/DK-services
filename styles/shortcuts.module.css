@@ -1,7 +1,7 @@
 .shortcuts{
     display: flex;
     flex-wrap: wrap;
-    gap: 3rem;
+    gap: 4rem;
     row-gap: 1rem;
     max-width: 1000px;
     margin: 25px auto;

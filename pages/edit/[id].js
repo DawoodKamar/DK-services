@@ -381,7 +381,7 @@ export async function getServerSideProps(context) {
   const { req } = context;
 
   // Determine the base URL
-  const protocol = req.headers['x-forwarded-proto'] || 'http';
+  const protocol = req.headers["x-forwarded-proto"] || "http";
   const baseUrl = `${protocol}://${req.headers.host}`;
 
   // Fetch the data from the server-side route "/api/work-orders/[id]"
