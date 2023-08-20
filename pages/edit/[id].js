@@ -168,12 +168,13 @@ export default function EditWorkOrder({ workOrderData }) {
 
   const handleTimeChange = (e, index) => {
     const newDescriptions = [...formState.descriptions];
+    const inputValue = e.target.value;
 
     // If the input value ends with a decimal point, keep it as a string
     if (inputValue.endsWith(".")) {
-      newDescriptions[index].time = target.value;
+      newDescriptions[index].time = inputValue;
     } else {
-      newDescriptions[index].time = parseFloat(e.target.value) || 0;
+      newDescriptions[index].time = parseFloat(inputValue) || 0;
     }
     setFormState((prevState) => ({
       ...prevState,
