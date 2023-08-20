@@ -102,12 +102,12 @@ export default function WorkOrderForm() {
   //--------------------------------get user id--------------------------------------------------------
   const { isLoaded, isSignedIn, user } = useUser();
   const userId = user && user.id;
-  const localDate = new Date();
-  localDate.setMinutes(localDate.getMinutes() - localDate.getTimezoneOffset());
 
   //------------------------------form state----------------================================
   //  The initial state is an object with keys for each input in the form,
   // and empty string values for each key. The jobDate key is initialized with the current date
+  const localDate = new Date();
+  localDate.setMinutes(localDate.getMinutes() - localDate.getTimezoneOffset());
 
   const [form, setForm] = useState({
     workOrderNumber: "",

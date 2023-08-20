@@ -31,6 +31,7 @@
     flex-wrap: wrap-reverse;
   }
 .workOrderUnit{
+  margin-right: 4px;
     order: -1;
   }
 

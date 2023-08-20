@@ -29,6 +29,15 @@ export default function SubmittedWorkOrder({ workOrderData }) {
     descriptions,
     parts,
   } = workOrderData;
+  const datePart = jobDate.split("T")[0]; // This will give "2023-08-19"
+  const [year, month, day] = datePart.split("-").map(Number);
+
+  const dateObject = new Date(year, month - 1, day); // month is 0-indexed
+  const formattedDate = dateObject.toLocaleDateString(undefined, {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
 
   const handleDownloadPDF = async () => {
     if (html2pdf) {
@@ -72,14 +81,14 @@ export default function SubmittedWorkOrder({ workOrderData }) {
 
         <div className={styles.workOrderInfo}>
           <div className={styles.client}>
-            <p>Date: &emsp;{new Date(jobDate).toLocaleDateString()}</p>
+            <p>Date:&emsp;{formattedDate}</p>
             <p>Client: &emsp;{client}</p>
             <p>Address: &emsp;{address}</p>
             <p>City: &emsp;{city}</p>
           </div>
 
           <div className={styles.workOrderUnit}>
-            <p>Unit Number: &emsp;{unitNumber}</p>
+            <p>Unit Number:&emsp;{unitNumber}</p>
             <p>License Plate: &emsp;{licensePlate}</p>
             <p>Hubometer: &emsp;{hubometer}</p>
             <p>VIN:&emsp; {vin}</p>
@@ -122,7 +131,7 @@ export async function getServerSideProps(context) {
   const { req } = context;
 
   // Determine the base URL
-  const protocol = req.headers['x-forwarded-proto'] || 'http';
+  const protocol = req.headers["x-forwarded-proto"] || "http";
   const baseUrl = `${protocol}://${req.headers.host}`;
 
   // Fetch the data from the server-side route "/api/work-orders/[workOrderNumber]"

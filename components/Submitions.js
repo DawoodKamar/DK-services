@@ -128,7 +128,10 @@ export default function Submitions() {
           </div>
         ) : (
           workOrders.map((workOrder) => {
-            const dateObject = new Date(workOrder.jobDate); // Convert string to date object
+            const datePart = workOrder.jobDate.split("T")[0]; // This will give "2023-08-19"
+            const [year, month, day] = datePart.split("-").map(Number);
+
+            const dateObject = new Date(year, month - 1, day); // month is 0-indexed
             const formattedDate = dateObject.toDateString();
 
             return (
