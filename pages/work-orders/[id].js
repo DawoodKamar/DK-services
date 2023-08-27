@@ -43,6 +43,7 @@ export default function SubmittedWorkOrder({ workOrderData }) {
       const ctx = canvas.getContext("2d");
       ctx.drawImage(this, 0, 0);
       const dataURL = canvas.toDataURL("image/jpeg");
+      const pageHeight = doc.internal.pageSize.height - 20;
 
       // Add the image to the PDF
       doc.addImage(dataURL, "JPEG", 20, 10, 164, 32);
@@ -55,10 +56,10 @@ export default function SubmittedWorkOrder({ workOrderData }) {
       doc.text("Client: " + client, 10, 80);
       doc.text("Address: " + address, 10, 90);
       doc.text("City: " + city, 10, 100);
-      doc.text("Unit Number: " + unitNumber, 130, 70);
-      doc.text("License Plate: " + licensePlate, 130, 80);
-      doc.text("Hubometer: " + hubometer, 130, 90);
-      doc.text("VIN: " + vin, 130, 100);
+      doc.text("Unit Number: " + unitNumber, 115, 70);
+      doc.text("License Plate: " + licensePlate, 115, 80);
+      doc.text("Hubometer: " + hubometer, 115, 90);
+      doc.text("VIN: " + vin, 115, 100);
 
       doc.setFontSize(24);
       doc.text("Descriptions", 10, 120);
@@ -70,6 +71,7 @@ export default function SubmittedWorkOrder({ workOrderData }) {
 
       descriptions.forEach((description) => {
         // Split the description text into lines
+
         const lines = doc.splitTextToSize(
           "- " + description.description,
           maxWidth
@@ -85,6 +87,10 @@ export default function SubmittedWorkOrder({ workOrderData }) {
 
         // Adjust the y-coordinate for the next description
         yCoordinate += lines.length * lineHeight + 5;
+        if (yCoordinate > pageHeight) {
+          doc.addPage();
+          yCoordinate = 20;
+        }
       });
       doc.setFontSize(20);
       doc.text("Total Hours: " + totalHours, 75, yCoordinate);
@@ -95,6 +101,10 @@ export default function SubmittedWorkOrder({ workOrderData }) {
       doc.setFontSize(12);
       yCoordinate += lineHeight;
       parts.forEach((part) => {
+        if (yCoordinate > pageHeight) {
+          doc.addPage();
+          yCoordinate = 20;
+        }
         doc.text(part.quantity + " - " + part.part, 10, yCoordinate);
         yCoordinate += lineHeight;
       });
