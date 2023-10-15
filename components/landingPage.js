@@ -2,8 +2,57 @@ import Layout from "./layout";
 import styles from "../styles/landingPage.module.css";
 import Image from "next/image";
 import ContactForm from "./ContactForm";
+import { useState } from "react";
 
 export default function LandingPage() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const items = [
+    {
+      description:
+        "Adaptive & Fast Workflow Tailored for Truck and Trailer Mechanics. Streamline your service operations with our intuitive work order form.",
+      image: "/images/form.png",
+    },
+    {
+      description:
+        " Easily Access Work Orders & Job History. Search and edit jobs on-the-go for efficient operations.",
+      image: "/images/submissions.png",
+    },
+    {
+      description:
+        "Instant PDF Downloads: Speed up invoicing with easily accessible work order PDFs.",
+      image: "/images/pdfexample.png",
+    },
+  ];
+  const updateIndex = (newIndex) => {
+    if (newIndex < 0) {
+      newIndex = 0;
+    } else if (newIndex >= items.length) {
+      newIndex = items.length - 1;
+    }
+
+    setActiveIndex(newIndex);
+  };
+  const [startX, setStartX] = useState(0);
+  const [endX, setEndX] = useState(0);
+
+  const handleTouchStart = (e) => {
+    const touchObj = e.changedTouches[0];
+    setStartX(touchObj.clientX);
+  };
+
+  const handleTouchEnd = (e) => {
+    const touchObj = e.changedTouches[0];
+    setEndX(touchObj.clientX);
+    handleSwipe();
+  };
+
+  const handleSwipe = () => {
+    if (endX - startX > 50) {
+      updateIndex(activeIndex - 1);
+    } else if (startX - endX > 50) {
+      updateIndex(activeIndex + 1);
+    }
+  };
   return (
     <Layout>
       <section className={`${styles.hero} ${styles.wrap}`}>
@@ -39,43 +88,66 @@ export default function LandingPage() {
       </section>
       {/* ----------------------------------------------------------------------- */}
 
-      <section className={`${styles.break} ${styles.diagonal}`}>
-        <div className={styles.wrap}>
-          <div className={styles.working}>
-            <Image
-              src="/images/working.jpg"
-              alt="Reefer"
-              width={1118}
-              height={871}
-              className={styles.img3}
-            />
+      <section className={styles.diagonal}>
+        <div className={styles.carousel}>
+          <div
+            className={styles.inner}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+          >
+            {items.map((item, index) => {
+              return (
+                <div key={index} className={styles.carouselItem}>
+                  <Image
+                    className={styles.carouselimg}
+                    src={item.image}
+                    alt="site preview"
+                    width={350}
+                    height={500}
+                  />
+                  <div className={styles.carouselItemsText}>
+                    {item.description}
+                  </div>
+                </div>
+              );
+            })}
           </div>
-          <div>
-            <div className={styles.tag1}>
-              <h2 className={styles.tag}>Experience</h2>
-              <p>
-                Crafted from years in the truck and trailer service trenches.
-              </p>
+          <div className={styles.carouselbuttons}>
+            <button
+              className={styles.buttonarrow}
+              onClick={() => updateIndex(activeIndex - 1)}
+            >
+              <span className="material-symbols-outlined">arrow_back_ios</span>
+            </button>
+            <div className={styles.indicators}>
+              {items.map((item, index) => {
+                return (
+                  <button key={index} onClick={() => updateIndex(index)}>
+                    <span
+                      className={`material-symbols-outlined ${
+                        index === activeIndex
+                          ? styles.indicatorsymbolactive
+                          : styles.indicatorsymbol
+                      }`}
+                    >
+                      radio_button_checked
+                    </span>
+                  </button>
+                );
+              })}
             </div>
-            {/* <div className={styles.line}></div> */}
-            <div className={styles.tag2}>
-              <h2 className={styles.tag}>Reliability</h2>
-              <p>
-                Designed by a fully licensed mechanic who knows the value of
-                trust. <br></br>
-                <br></br>Count on a platform as reliable as the hands that built
-                it.
-              </p>
-            </div>
-            {/* <div className={styles.line}></div> */}
-            <div className={styles.tag3}>
-              <h2 className={styles.tag}>Dedication</h2>
-              <p>More than just an app, it's a mechanic's promise.</p>
-            </div>
+            <button
+              className={styles.buttonarrow}
+              onClick={() => updateIndex(activeIndex + 1)}
+            >
+              <span className="material-symbols-outlined">
+                arrow_forward_ios
+              </span>
+            </button>
           </div>
         </div>
       </section>
-
       <ContactForm />
     </Layout>
   );
